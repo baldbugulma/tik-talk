@@ -1,6 +1,8 @@
 :host{
     padding: 20px 12px;
     display: block;
+    position: relative;
+    background: var(--dark-color);
 }
 
 .main-menu-list{
@@ -24,7 +26,7 @@
     align-items: center;
     width: 100%;
     text-align: left;
-    border-bottom: 2px;
+    border-radius: 2px;
 
     &:hover,
     &:focus-visible{
@@ -56,4 +58,38 @@
     color: var(--primary-color);
     width: 18px;
     height: 18px;
+}
+
+
+.sidebar__footer{
+    background: var(--dark-hover-color);
+    width: calc(100% - 20px);
+    border-radius: 2px;
+    padding: 4px 16px;
+    display: grid;
+    grid-template-columns: 32px 1fr 16px;
+    grid-gap: 12px;
+    align-items: center;
+
+    img{ 
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+    }
+
+    .username-text{
+        color: var(--primary-color);
+        font-weight: 700;
+    }
+    position: absolute;
+    bottom: 20px;
+}
+
+
+.settings-btn{
+    svg{ 
+        width: 13px;
+        height: 13px;
+        color: var(--primary-color);
+    }
 }
