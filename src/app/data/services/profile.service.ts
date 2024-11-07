@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
+import { map, Observable, tap } from 'rxjs';
 import { Pageble } from './interfaces/pagebale.interface';
 import { Profile } from './interfaces/profile.interface';
-import { map, Observable, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +26,7 @@ export class ProfileService {
   }
 
   getAccount(id:string){
-    return this.http.get<Profile>(`${this.baseApiUrl}/account/${id}`)
+    return this.http.get<Profile>(`${this.baseApiUrl}account/${id}`)
   }
 
   getMe(){
@@ -34,5 +34,12 @@ export class ProfileService {
       .pipe(
         tap(res=> this.me.set(res))
       )
+  }
+
+  patchProfile(profile: Partial<Profile>){
+    return this.http.patch<Profile>(
+      `${this.baseApiUrl}account/me`, 
+      profile
+    )
   }
 }

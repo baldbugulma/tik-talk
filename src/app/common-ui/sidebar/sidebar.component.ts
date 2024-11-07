@@ -1,12 +1,11 @@
 import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
-import { Component, inject, Input } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { firstValueFrom } from 'rxjs';
 import { ProfileService } from '../../data/services/profile.service';
+import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 import { SvgIconComponent } from '../svg-icon/svg-icon.component';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
-import { Profile } from '../../data/services/interfaces/profile.interface';
-import { firstValueFrom } from 'rxjs';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
 
 
 @Component({
@@ -29,7 +28,7 @@ export class SidebarComponent {
     {
       label: `Моя страница`,
       icon: `home`,
-      link: ''
+      link: 'profile/me'
     },
     {
       label: `Чаты`,
