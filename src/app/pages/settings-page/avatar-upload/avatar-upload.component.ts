@@ -3,19 +3,22 @@ import { Component, inject, signal } from '@angular/core';
 import { DndDirective } from '../../../common-ui/directives/dnd.directive';
 import { SvgIconComponent } from "../../../common-ui/svg-icon/svg-icon.component";
 import { ProfileService } from '../../../data/services/profile.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-avatar-upload',
   standalone: true,
-  imports: [SvgIconComponent, DndDirective, AsyncPipe],
+  imports: [SvgIconComponent, DndDirective, AsyncPipe, FormsModule],
   templateUrl: './avatar-upload.component.html',
   styleUrl: './avatar-upload.component.scss'
 })
 export class AvatarUploadComponent {
 
+  avatar: File | null = null
+
   profileService = inject(ProfileService)
 
-  previewUrl: string | null | undefined = this.profileService.me()?.avatarUrl ? this.profileService.me()?.avatarUrl : `/assets/imgs/avatar-placeholder.png`
+  previewUrl: string | null | undefined = this.profileService.me()?.avatarUrl ? `https://icherniakov.ru/yt-course/${this.profileService.me()?.avatarUrl}` : `/assets/imgs/avatar-placeholder.png`
 
   preview = signal<string>(`${this.previewUrl}`)
   
@@ -40,5 +43,6 @@ export class AvatarUploadComponent {
     };
 
     reader.readAsDataURL(file)
+    this.avatar = file
   }
 }

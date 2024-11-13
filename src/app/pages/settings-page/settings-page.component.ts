@@ -1,4 +1,4 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, effect, inject, ViewChild, viewChild } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom, Observable } from 'rxjs';
@@ -17,6 +17,8 @@ import { AvatarUploadComponent } from "./avatar-upload/avatar-upload.component";
 export class SettingsPageComponent {
   fb = inject(FormBuilder)
   profileService = inject(ProfileService)
+
+  @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent
   
   me$: Observable<Profile | null> = toObservable(this.profileService.me)
 
@@ -45,6 +47,12 @@ export class SettingsPageComponent {
       this.form.updateValueAndValidity()
 
       if(this.form.invalid) return
+
+      if(this.avatarUploader.avatar){
+        firstValueFrom (this.profileService.uploadAvatar(this.avatarUploader.avatar))
+      }
+
+      console.log(this.avatarUploader.avatar)
       
       //@ts-ignore
       firstValueFrom(this.profileService.patchProfile({
