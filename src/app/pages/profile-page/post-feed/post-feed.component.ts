@@ -47,4 +47,40 @@ export class PostFeedComponent {
     const height = window.innerHeight - top - 24 - 24
     this.r2.setStyle(this.hostElement.nativeElement, 'height', `${height}px`)
   }
+
+
+
+  createPostOrComment(data:any){
+    console.log(data)
+
+    // if(!data.text) return
+    
+    // firstValueFrom(this.postService.createPost({
+    //   title: 'Новый пост',
+    //   content: data.text,
+    //   authorId: data.authorId
+    // }))
+
+    // if(this.isCommentInput()) {
+    //   firstValueFrom(this.postService.createComment({
+    //     text: this.postText,
+    //     postId: this.postId(),
+    //     authorId: this.profile()!.id
+    //   })).then(() =>{
+    //       this.postText=''
+    //       this.created.emit()
+    //   }
+    //   )
+    //   return 
+    // }
+
+    // firstValueFrom(this.postService.createPost({
+    //   title: 'Клевый пост',
+    //   content: this.postText,
+    //   authorId: this.profile()!.id
+    // })).then(() =>{
+    //     this.postText=''
+    // }
+    // )
+  }
 }

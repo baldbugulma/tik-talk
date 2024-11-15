@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, input, OnInit, signal } from '@angular/core';
+import { Component, inject, Input, input, OnInit, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent } from "../../../common-ui/avatar-circle/avatar-circle.component";
 import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
@@ -21,8 +21,8 @@ export class PostComponent implements OnInit{
   postService = inject(PostService)
 
   comments = signal<PostComment[]>([])
+  @Input() createPostOrComment: (event:any) => void = () => {};
 
-  
 
   async ngOnInit(){
     this.comments.set(this.post()!.comments)

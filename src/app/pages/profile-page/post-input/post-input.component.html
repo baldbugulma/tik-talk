@@ -10,10 +10,11 @@ class="size32"
     [(ngModel)]="postText"
     class="hidden-textarea"
     (input)="onTextAreaInput($event)"
+    #textArea
 >
 </textarea>
 
-<button class="btn-icon" (click)="onCreatePost()">
+<button class="btn-icon" (click)="setData(textArea)">
     <svg icon="send-message" class="svg16">
     </svg>
 </button>

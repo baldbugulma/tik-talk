@@ -32,9 +32,9 @@
         </div>
 
         <app-post-input 
-            (created)="onCreated()"
             [isCommentInput]='true' 
             [postId]="post.id"
+            (outDataPost)="createPostOrComment($event)"
         ></app-post-input>
     </main>
 }
