@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, Input, input, OnInit, signal } from '@angular/core';
+import { Component, EventEmitter, inject, input, OnInit, Output, signal } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 import { AvatarCircleComponent } from "../../../common-ui/avatar-circle/avatar-circle.component";
 import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
@@ -21,7 +21,9 @@ export class PostComponent implements OnInit{
   postService = inject(PostService)
 
   comments = signal<PostComment[]>([])
-  @Input() createPostOrComment: (event:any) => void = () => {};
+
+
+  @Output() outDataPost = new EventEmitter<{text: string | null; postId: number | null; authorId:number | null; isCommentInput: boolean } >()
 
 
   async ngOnInit(){
@@ -32,5 +34,10 @@ export class PostComponent implements OnInit{
     const comments = await firstValueFrom(this.postService.getCommentsByPostId(this.post()!.id))
     // @ts-ignore
     this.comments.set(comments)
+  }
+
+  setData(data: any){
+    this.outDataPost.emit(data)
+    this.onCreated()
   }
 }
