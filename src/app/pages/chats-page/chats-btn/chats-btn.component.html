@@ -5,7 +5,7 @@
     ></app-avatar-circle>
     <div class="last-message__wrapper">
         <div class="chat-user medium-text">{{chat.userFrom.lastName}} {{chat.userFrom.firstName}}</div>
-        <div class="medium-text">{{chat.message}}</div>
+        <div class="medium-text">{{chat.message ?? '...'}}</div>
     </div>
 }
 
