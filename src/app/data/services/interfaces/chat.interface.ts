@@ -5,7 +5,9 @@ export interface Chat {
     userFirst: Profile,
     userSecond: Profile,
     companion?: Profile,
-    messages: Message[]
+    messages: Message[],
+    groupedMessage: GroupedMessage[]
+    
 }
 
 export interface Message{
@@ -24,4 +26,9 @@ export interface LastMessageRes{
     id: number,
     userFrom: Profile,
     message: string | null,
+}
+
+export interface GroupedMessage {
+    date: string;
+    messages: Message[];
 }

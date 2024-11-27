@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { inject, Injectable, signal } from "@angular/core";
 import { map } from "rxjs";
-import { Chat, LastMessageRes, Message } from "./interfaces/chat.interface";
+import { Chat, GroupedMessage, LastMessageRes, Message } from "./interfaces/chat.interface";
 import { ProfileService } from "./profile.service";
 
 @Injectable({
@@ -11,7 +11,7 @@ export class ChatsService {
     http = inject(HttpClient); 
     me = inject(ProfileService).me
 
-    activeChatMessages = signal<Message[]>([])
+    activeChatMessages = signal<GroupedMessage[]>([])
 
     baseApiUrl :string = 'https://icherniakov.ru/yt-course/'
 
@@ -38,8 +38,24 @@ export class ChatsService {
                             isMine: message.userFromId === this.me()!.id
                         }
                     }) 
+
+                    const groupedMessages = patchedMessages.reduce<GroupedMessage[]>((acc, message) => {
+                            const date = message.createdAt.split('T')[0];
+
+                            const existingGroup = acc.find(group => group.date === date);
+                            if (existingGroup) {
+                                // Если группа существует, добавляем сообщение
+                                existingGroup.messages.push(message);
+                            } else {
+                                // Если группы нет, создаем новую
+                                acc.push({ date, messages: [message] });
+                            }
+                        
+                            return acc;
+
+                    },[])
                 
-                this.activeChatMessages.set(chat.messages)
+                this.activeChatMessages.set(groupedMessages)
                 return {
                     ...chat,
                     companion: chat.userFirst.id === this.me()!.id ? chat.userSecond : chat.userFirst, 

@@ -6,21 +6,23 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class AddTimePipe implements PipeTransform {
 
-
   transform(dateString: string): string {
     const inputDate = new Date(dateString);
+  
+    // Преобразование даты к локальной зоне пользователя
+    const localDate = new Date(inputDate.getTime() - inputDate.getTimezoneOffset() * 60 * 1000);
+  
     const currentDate = new Date();
-
+  
     // Вычисляем разницу во времени в миллисекундах
-    const diffInMs = currentDate.getTime() - inputDate.getTime();
-    
-    // Конвертируем разницу во времени в единицы
+    const diffInMs = currentDate.getTime() - localDate.getTime();
+  
+    // Оставшаяся логика остается неизменной
     const diffInMinutes = Math.floor(diffInMs / (1000 * 60));
     const diffInHours = Math.floor(diffInMs / (1000 * 60 * 60));
     const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
-    const diffInMonths = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 30.44)); // Среднее число дней в месяце
-
-    // Логика для определения правильной строки времени
+    const diffInMonths = Math.floor(diffInMs / (1000 * 60 * 60 * 24 * 30.44));
+  
     if (diffInMinutes < 1) {
       return 'Только что';
     } else if (diffInMinutes === 1) {
@@ -41,6 +43,7 @@ export class AddTimePipe implements PipeTransform {
       return `${diffInMonths} ${this.declineWord(diffInMonths, 'месяц', 'месяца', 'месяцев')} назад`;
     }
   }
+  
 
   // Метод для склонения слов (минуты, часы, дни, месяцы)
   private declineWord(number: number, form1: string, form2: string, form5: string): string {

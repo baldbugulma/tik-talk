@@ -1,9 +1,12 @@
 
-    <div class="messages-wrapper">
-        @for(message of messages(); track message.id ){
-        <app-chat-workspace-message
-        [message]="message"
-        ></app-chat-workspace-message>
+    <div class="messages-wrapper" #messagesWrapper>
+        @for(groupDate of messages(); track groupDate){
+            <div class ="messages-wrapper-day">{{groupDate.date | formatDate}}</div>
+            @for(message of groupDate.messages; track message.id ){
+                <app-chat-workspace-message
+                [message]="message"
+                ></app-chat-workspace-message>
+            }
         }
     </div>
 
