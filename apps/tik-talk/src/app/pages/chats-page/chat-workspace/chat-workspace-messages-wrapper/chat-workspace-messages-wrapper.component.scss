@@ -1,0 +1,23 @@
+:host {
+  display: grid;
+  padding: 16px 20px;
+  height: calc(100vh - 120px);
+  grid-template-rows: 1fr auto; /* Сообщения занимают всё доступное пространство, а инпут прижат внизу */
+}
+
+.messages-wrapper {
+  display: flex;
+  flex-direction: column;
+  grid-gap: 12px;
+  overflow-y: scroll;
+  padding-bottom: 20px;
+}
+
+.messages-wrapper-day {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  width: max-content;
+  padding: 6px 31px;
+  background: var(--dark-hover-color);
+}
