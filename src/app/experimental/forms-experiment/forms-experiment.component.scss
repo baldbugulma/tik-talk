@@ -1,0 +1,11 @@
+.delivery-form{ 
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.contact-group{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+
+    grid-gap: 12px;
+}
