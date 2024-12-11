@@ -6,12 +6,13 @@ import {
   Post,
   PostComment,
   PostCreateDto,
-} from './interfaces/post.interface';
+} from '../interfaces/post.interface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class PostService {
+
   #http = inject(HttpClient);
 
   posts = signal<Post[]>([]);

@@ -2,9 +2,9 @@ import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { firstValueFrom } from 'rxjs';
-import { ProfileService } from '../../data/services/profile.service';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { ProfileService } from '../../../../../../libs/profile/src/lib/data/services/profile.service';
+import { ImgUrlPipe } from '../../../../../../libs/common-ui/src/lib/pipes/img-url.pipe';
+import { SvgIconComponent } from '../../../../../../libs/common-ui/src/lib/components/svg-icon/svg-icon.component';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 
 @Component({

@@ -5,12 +5,14 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, Observable, switchMap } from 'rxjs';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
 import { SubscriberCardComponent } from '../../common-ui/sidebar/subscriber-card/subscriber-card.component';
-import { SvgIconComponent } from '../../common-ui/svg-icon/svg-icon.component';
+import { SvgIconComponent } from '../../../../../../libs/common-ui/src/lib/components/svg-icon/svg-icon.component';
 import { ChatsService } from '../../data/services/chats.service';
-import { Profile } from '../../data/services/interfaces/profile.interface';
-import { ProfileService } from '../../data/services/profile.service';
-import { ImgUrlPipe } from '../../helpers/pipes/img-url.pipe';
-import { PostFeedComponent } from './post-feed/post-feed.component';
+import { Profile } from '../../../../../../libs/profile/src/lib/data/interfaces/profile.interface';
+import { ProfileService } from '../../../../../../libs/profile/src/lib/data/services/profile.service';
+import { ImgUrlPipe } from '../../../../../../libs/common-ui/src/lib/pipes/img-url.pipe';
+import {PostFeedComponent} from "@tt/posts";
+
+
 
 @Component({
   selector: 'app-profile-page',

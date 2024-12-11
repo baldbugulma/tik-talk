@@ -6,7 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { AuthService } from '../../auth/auth.service';
+import {AuthService} from "@tt/auth";
 
 @Component({
   selector: 'app-login-page',
@@ -32,7 +32,7 @@ export class LoginPageComponent {
   onSubmit() {
     if (this.form.valid) {
       //@ts-ignore
-      this.authService.login(this.form.value).subscribe((res) => {
+      this.authService.login(this.form.value).subscribe((res: any) => {
         console.log(res);
         this.router.navigate(['']);
       });

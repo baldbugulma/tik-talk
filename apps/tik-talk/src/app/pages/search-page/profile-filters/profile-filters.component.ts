@@ -5,7 +5,7 @@ import {
   FormGroup,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ProfileService } from '../../../data/services/profile.service';
+import { ProfileService } from '../../../../../../../libs/profile/src/lib/data/services/profile.service';
 import { debounceTime, startWith, switchMap } from 'rxjs';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

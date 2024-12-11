@@ -1,8 +1,8 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { DndDirective } from '../../../common-ui/directives/dnd.directive';
-import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
-import { ProfileService } from '../../../data/services/profile.service';
+import { SvgIconComponent } from '../../../../../../../libs/common-ui/src/lib/components/svg-icon/svg-icon.component';
+import { ProfileService } from '../../../../../../../libs/profile/src/lib/data/services/profile.service';
 import { FormsModule } from '@angular/forms';
 
 @Component({

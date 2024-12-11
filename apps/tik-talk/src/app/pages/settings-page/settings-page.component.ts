@@ -3,8 +3,8 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom, Observable } from 'rxjs';
 import { ProfileHeaderComponent } from '../../common-ui/profile-header/profile-header.component';
-import { Profile } from '../../data/services/interfaces/profile.interface';
-import { ProfileService } from '../../data/services/profile.service';
+import { Profile } from '../../../../../../libs/profile/src/lib/data/interfaces/profile.interface';
+import { ProfileService } from '../../../../../../libs/profile/src/lib/data/services/profile.service';
 import { AvatarUploadComponent } from './avatar-upload/avatar-upload.component';
 
 @Component({

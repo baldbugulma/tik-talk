@@ -1,8 +1,8 @@
 import { AsyncPipe, JsonPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { ProfileCardComponent } from '../../common-ui/profile-card/profile-card.component';
-import { Profile } from '../../data/services/interfaces/profile.interface';
-import { ProfileService } from '../../data/services/profile.service';
+import { Profile } from '../../../../../../libs/profile/src/lib/data/interfaces/profile.interface';
+import { ProfileService } from '../../../../../../libs/profile/src/lib/data/services/profile.service';
 import { ProfileFiltersComponent } from './profile-filters/profile-filters.component';
 
 @Component({

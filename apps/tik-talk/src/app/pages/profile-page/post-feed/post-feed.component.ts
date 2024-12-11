@@ -1,6 +1,6 @@
 import { Component, ElementRef, inject, Renderer2 } from '@angular/core';
 import { audit, firstValueFrom, fromEvent, interval } from 'rxjs';
-import { PostService } from '../../../data/services/post.service';
+import { PostService } from '../../../../../../../libs/posts/src/lib/data/services/post.service';
 import { PostInputComponent } from '../post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
 

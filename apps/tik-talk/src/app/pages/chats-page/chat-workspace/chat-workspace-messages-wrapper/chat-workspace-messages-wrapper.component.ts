@@ -11,7 +11,7 @@ import { audit, switchMap } from 'rxjs/operators';
 import { MessageInputComponent } from '../../../../common-ui/message-input/message-input.component';
 import { ChatsService } from '../../../../data/services/chats.service';
 import { Chat } from '../../../../data/services/interfaces/chat.interface';
-import { FormatDatePipe } from '../../../../helpers/pipes/format-date.pipe';
+import { FormatDatePipe } from '../../../../../../../../libs/common-ui/src/lib/pipes/format-date.pipe';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 
 @Component({

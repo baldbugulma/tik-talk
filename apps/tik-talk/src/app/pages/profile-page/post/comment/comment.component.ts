@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input } from '@angular/core';
-import { AvatarCircleComponent } from '../../../../common-ui/avatar-circle/avatar-circle.component';
-import { PostComment } from '../../../../data/services/interfaces/post.interface';
+import { AvatarCircleComponent } from '../../../../../../../../libs/common-ui/src/lib/components/avatar-circle/avatar-circle.component';
+import { PostComment } from '../../../../../../../../libs/posts/src/lib/data/interfaces/post.interface';
 
 @Component({
   selector: 'app-comment',

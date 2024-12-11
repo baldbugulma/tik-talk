@@ -7,9 +7,9 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ProfileService } from '../../data/services/profile.service';
-import { AvatarCircleComponent } from '../avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '../svg-icon/svg-icon.component';
+import { ProfileService } from '../../../../../../libs/profile/src/lib/data/services/profile.service';
+import { AvatarCircleComponent } from '../../../../../../libs/common-ui/src/lib/components/avatar-circle/avatar-circle.component';
+import { SvgIconComponent } from '../../../../../../libs/common-ui/src/lib/components/svg-icon/svg-icon.component';
 
 @Component({
   selector: 'app-message-input',

@@ -1,0 +1,10 @@
+:host {
+  display: grid;
+  grid-gap: 16px;
+  overflow-y: scroll;
+  scrollbar-width: none; /* Firefox */
+}
+
+:host::-webkit-scrollbar {
+  display: none; /* Chrome, Safari и Edge */
+}

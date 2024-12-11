@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { canActivateAuth } from './auth/access.guard';
+import { canActivateAuth } from '../../../../libs/auth/src/lib/auth/access.guard';
 import { LayoutComponent } from './common-ui/layout/layout.component';
 import { ChatsPageComponent } from './pages/chats-page/chats.component';
 import { chatsRoutes } from './pages/chats-page/chatsRoutes';

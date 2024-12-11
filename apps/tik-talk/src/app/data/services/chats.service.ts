@@ -7,7 +7,7 @@ import {
   LastMessageRes,
   Message,
 } from './interfaces/chat.interface';
-import { ProfileService } from './profile.service';
+import { ProfileService } from '../../../../../../libs/profile/src/lib/data/services/profile.service';
 
 @Injectable({
   providedIn: 'root',

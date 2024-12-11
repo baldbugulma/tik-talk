@@ -9,10 +9,10 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AvatarCircleComponent } from '../../../common-ui/avatar-circle/avatar-circle.component';
-import { SvgIconComponent } from '../../../common-ui/svg-icon/svg-icon.component';
-import { PostService } from '../../../data/services/post.service';
-import { ProfileService } from '../../../data/services/profile.service';
+import { AvatarCircleComponent } from '../../../../../../../libs/common-ui/src/lib/components/avatar-circle/avatar-circle.component';
+import { SvgIconComponent } from '../../../../../../../libs/common-ui/src/lib/components/svg-icon/svg-icon.component';
+import { PostService } from '../../../../../../../libs/posts/src/lib/data/services/post.service';
+import { ProfileService } from '../../../../../../../libs/profile/src/lib/data/services/profile.service';
 
 @Component({
   selector: 'app-post-input',
