@@ -8,11 +8,14 @@ import {
 } from '@angular/core';
 import { firstValueFrom, fromEvent, interval, timer } from 'rxjs';
 import { audit, switchMap } from 'rxjs/operators';
-import { MessageInputComponent } from '../../../../common-ui/message-input/message-input.component';
-import { ChatsService } from '../../../../../../../../libs/chats/src/lib/data/services/chats.service';
-import { Chat } from '../../../../../../../../libs/chats/src/lib/data/interfaces/chat.interface';
-import { FormatDatePipe } from '../../../../../../../../libs/common-ui/src/lib/pipes/format-date.pipe';
+
+
+
+
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
+import {ChatsService, MessageInputComponent} from "@tt/chats";
+import {FormatDatePipe} from "@tt/common-ui";
+import {Chat} from "../../../data/interfaces/chat.interface";
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',

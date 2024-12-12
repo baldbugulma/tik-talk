@@ -1,6 +1,6 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { DndDirective } from '../../../../../../apps/tik-talk/src/app/common-ui/directives/dnd.directive';
+import { DndDirective } from '../../../../../common-ui/src/lib/directives/dnd.directive';
 import { SvgIconComponent } from '../../../../../common-ui/src/lib/components/svg-icon/svg-icon.component';
 import { ProfileService } from '../../data/services/profile.service';
 import { FormsModule } from '@angular/forms';

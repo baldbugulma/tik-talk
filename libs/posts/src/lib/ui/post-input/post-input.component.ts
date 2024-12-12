@@ -12,8 +12,8 @@ import { FormsModule } from '@angular/forms';
 
 
 import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui";
-import {ProfileService} from "@tt/profile";
-import {PostService} from "../../data";
+
+import {GlobalStoreService} from "@tt/shared";
 
 
 
@@ -25,13 +25,15 @@ import {PostService} from "../../data";
   styleUrl: './post-input.component.scss',
 })
 export class PostInputComponent {
+
   r2 = inject(Renderer2);
-  profile = inject(ProfileService).me;
+  profile = inject(GlobalStoreService).me;
+
 
   isCommentInput = input<boolean>(false);
   postId = input<number>(0);
 
-  postService = inject(PostService);
+  // postService = inject(PostService);
   postText: string = '';
 
   @Output() outDataPost = new EventEmitter<{

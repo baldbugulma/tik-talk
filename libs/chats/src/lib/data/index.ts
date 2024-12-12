@@ -1,3 +1,4 @@
+import { LastMessageRes, Message } from './interfaces/chat.interface';
 import { ChatsService } from './services/chats.service';
 
-export {ChatsService}
+export {ChatsService, LastMessageRes, Message}

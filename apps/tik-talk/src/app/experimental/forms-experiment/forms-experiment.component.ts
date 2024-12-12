@@ -47,7 +47,7 @@ function getAdressForm(initialValue: Address = {}) {
   styleUrl: './forms-experiment.component.scss',
 })
 export class FormsExperimentComponent {
-  #fb = inject(FormBuilder);
+  fb = inject(FormBuilder);
 
   mockService = inject(MockService);
 

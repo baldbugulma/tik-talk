@@ -3,17 +3,11 @@ import { Component, inject, signal } from '@angular/core';
 import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { firstValueFrom, Observable, switchMap } from 'rxjs';
-import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
-import { SubscriberCardComponent } from '../../../../../../apps/tik-talk/src/app/common-ui/sidebar/subscriber-card/subscriber-card.component';
-import { SvgIconComponent } from '../../../../../common-ui/src/lib/components/svg-icon/svg-icon.component';
-
-import { Profile } from '../../data/interfaces/profile.interface';
-
-import { ImgUrlPipe } from '../../../../../common-ui/src/lib/pipes/img-url.pipe';
 import {PostFeedComponent} from "@tt/posts";
-import {ProfileService} from "@tt/profile";
-import {ChatsService} from "@tt/chats";
-
+import {ProfileService} from "../../data";
+import {ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
+import {ProfileHeaderComponent} from "../../ui"
+import { Profile } from '@tt/interfaces/profile';
 
 
 @Component({
@@ -24,7 +18,6 @@ import {ChatsService} from "@tt/chats";
     AsyncPipe,
     RouterLink,
     SvgIconComponent,
-    SubscriberCardComponent,
     ImgUrlPipe,
     PostFeedComponent,
   ],
@@ -33,7 +26,7 @@ import {ChatsService} from "@tt/chats";
 })
 export class ProfilePageComponent {
   profileService = inject(ProfileService);
-  chatsService = inject(ChatsService);
+
   route = inject(ActivatedRoute);
   router = inject(Router);
 
@@ -53,8 +46,6 @@ export class ProfilePageComponent {
   );
 
   async sendMessag(userId: number) {
-    await firstValueFrom(this.chatsService.createChat(userId)).then((res) => {
-      this.router.navigate([`/chats/${res.id}`]);
-    });
+    this.router.navigate([`/chats`, 'new'], {queryParams: {userId}});
   }
 }

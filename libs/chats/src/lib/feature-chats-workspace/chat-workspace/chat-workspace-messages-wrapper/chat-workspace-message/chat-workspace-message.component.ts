@@ -1,8 +1,10 @@
 import { DatePipe } from '@angular/common';
 import { Component, HostBinding, input } from '@angular/core';
-import { AvatarCircleComponent } from '../../../../../../../../../libs/common-ui/src/lib/components/avatar-circle/avatar-circle.component';
-import { Message } from '../../../../../../../../../libs/chats/src/lib/data/interfaces/chat.interface';
-import { FormatDatePipe } from '../../../../../../../../../libs/common-ui/src/lib/pipes/format-date.pipe';
+
+
+
+import {AvatarCircleComponent, FormatDatePipe} from "@tt/common-ui";
+import {Message} from "@tt/chats";
 
 @Component({
   selector: 'app-chat-workspace-message',
