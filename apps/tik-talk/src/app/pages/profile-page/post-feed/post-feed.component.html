@@ -1,4 +1,0 @@
-<app-post-input (outDataPost)="createPostOrComment($event)"></app-post-input>
-@for(post of feed(); track post.id){
-<app-post (outDataPost)="createPostOrComment($event)" [post]="post"></app-post>
-}
