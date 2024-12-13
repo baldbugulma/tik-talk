@@ -3,9 +3,9 @@ import { toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { firstValueFrom, Observable } from 'rxjs';
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
-import { Profile } from '../../../../../interfaces/src/lib/profile/profile.interface';
 import { ProfileService } from '../../data/services/profile.service';
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component';
+import {Profile} from "@tt/interfaces/profile";
 
 @Component({
   selector: 'app-settings-page',
