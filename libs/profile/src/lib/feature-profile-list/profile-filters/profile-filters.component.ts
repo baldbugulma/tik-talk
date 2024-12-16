@@ -36,6 +36,8 @@ export class ProfileFiltersComponent {
         debounceTime(300),
       )
       .subscribe(formValue => {
+        // При каждом изменении значений формы запускаем action `filterEvents`
+        // с текущими значениями формы в качестве фильтров.
         this.store.dispatch(profileActions.filterEvents({filters: formValue}));
       });
   }

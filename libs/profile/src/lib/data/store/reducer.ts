@@ -14,10 +14,14 @@ export const initialState: ProfileState = {
 
 
 export const profileFeature = createFeature({
+  // Название фичи (раздела состояния).
   name: 'profileFeature',
   reducer: createReducer(
+    // Начальное состояние.
     initialState,
+    // Обрабатываем действие 'profilesLoaded'.
     on(profileActions.profilesLoaded, (state: ProfileState, payload: {profiles: Profile[]})=>{
+      // Возвращаем новое состояние с обновлённым списком профилей.
       return {
         ...state,
         profiles: payload.profiles
