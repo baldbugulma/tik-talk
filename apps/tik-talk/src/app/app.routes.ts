@@ -13,6 +13,7 @@ import {LayoutComponent} from "@tt/layout";
 import {provideState} from "@ngrx/store";
 
 import {provideEffects} from "@ngrx/effects";
+import {PostEffects, postsFeature} from "../../../../libs/posts/src/lib/data";
 
 
 
@@ -33,7 +34,12 @@ export const routes: Routes = [
           provideEffects(ProfileEffects)
         ]
       },
-      { path: 'profile/:id', component: ProfilePageComponent },
+      { path: 'profile/:id', component: ProfilePageComponent,
+        providers: [
+          provideState(postsFeature),
+          provideEffects(PostEffects)
+        ]
+      },
       { path: 'settings', component: SettingsPageComponent },
       { path: 'chats', component: ChatsPageComponent },
       {

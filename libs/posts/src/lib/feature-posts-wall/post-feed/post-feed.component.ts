@@ -3,7 +3,8 @@ import { audit, firstValueFrom, fromEvent, interval } from 'rxjs';
 
 import { PostInputComponent } from '../../ui/post-input/post-input.component';
 import { PostComponent } from '../post/post.component';
-import {PostService} from "../../data";
+import {postsActions, PostService, selectPosts} from "../../data";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-post-feed',
@@ -13,8 +14,9 @@ import {PostService} from "../../data";
   styleUrl: './post-feed.component.scss',
 })
 export class PostFeedComponent {
+  store = inject(Store)
   postService = inject(PostService);
-  feed = this.postService.posts;
+  feed = this.store.selectSignal(selectPosts);
 
   // @HostListener('window:resize')
   // onWindowResize(){
@@ -26,7 +28,12 @@ export class PostFeedComponent {
   hostElement = inject(ElementRef);
 
   constructor() {
-    firstValueFrom(this.postService.fetchPosts());
+
+  }
+
+
+  ngOnInit() {
+    this.store.dispatch(postsActions.fetchPosts({}));
   }
 
   ngAfterViewInit() {

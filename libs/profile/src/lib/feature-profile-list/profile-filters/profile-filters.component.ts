@@ -20,7 +20,6 @@ import {Store} from "@ngrx/store";
 })
 export class ProfileFiltersComponent {
   fb = inject(FormBuilder);
-  profileService = inject(ProfileService);
   store = inject(Store)
 
   searchForm = this.fb.group({

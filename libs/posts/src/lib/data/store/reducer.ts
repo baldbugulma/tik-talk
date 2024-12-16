@@ -1,7 +1,7 @@
 import {Profile} from "@tt/interfaces/profile";
 import {createFeature, createReducer, on} from "@ngrx/store";
 import {Post} from "../interfaces/post.interface";
-import {postsAction} from "./action";
+import {postsActions} from "./action";
 
 export interface PostsState{
   posts: Post[],
@@ -18,12 +18,13 @@ export const postsFeature = createFeature({
   reducer: createReducer(
     // Начальное состояние.
     initialState,
-    // Обрабатываем действие 'profilesLoaded'.
-    on(postsAction.postsLoaded, (state: PostsState, payload: {posts: Post[]})=>{
+    // Обрабатываем действие 'postLoaded'.
+    on(postsActions.postsLoaded, (state: PostsState, payload: {posts: Post[]})=>{
       // Возвращаем новое состояние с обновлённым списком постов.
+      console.log('postloaded')
       return {
         ...state,
-        profiles: payload.posts
+        posts: payload.posts
       }
     })
   )

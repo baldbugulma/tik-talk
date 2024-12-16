@@ -34,7 +34,6 @@ export class PostService {
   fetchPosts() {
     return this.#http
       .get<Post[]>(`${this.baseApiUrl}post/`)
-      .pipe(tap((res) => this.posts.set(res)));
   }
 
   getCommentsByPostId(postId: number) {
