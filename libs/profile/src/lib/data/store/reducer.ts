@@ -26,6 +26,14 @@ export const profileFeature = createFeature({
         ...state,
         profiles: payload.profiles
       }
+    }),
+
+    //Сохраняем фильтры в сторе
+    on(profileActions.saveFilter, (state: ProfileState, { filters }) => {
+      return {
+        ...state,
+        profileFilters: filters
+      };
     })
   )
 })

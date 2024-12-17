@@ -7,6 +7,7 @@ export const profileActions = createActionGroup({
   // Определяем действия (events), связанные с профилями.
   events :{
     'filter events': props<{filters: Record<string, any>}>(),
-    'profiles loaded': props<{profiles: Profile[]}>()
+    'profiles loaded': props<{profiles: Profile[]}>(),
+    'save filter': props<{filters: Record<string, any>}>()
   }
 })

@@ -59,22 +59,24 @@ export class PostFeedComponent {
 
     if (!data.text) return;
     if (!data.isCommentInput) {
-      firstValueFrom(
-        this.postService.createPost({
+      this.store.dispatch(postsActions.createPost({
+        payload: {
           title: 'Новый пост',
           content: data.text,
           authorId: data.authorId,
-        })
-      );
+        }
+      }));
+
     }
 
     if (data.isCommentInput) {
-      firstValueFrom(
-        this.postService.createComment({
-          text: data.text,
-          postId: data.postId,
-          authorId: data.authorId,
-        })
+          this.store.dispatch(postsActions.createComment({
+            payload:{
+              text: data.text,
+              postId: data.postId,
+              authorId: data.authorId,
+            }
+          })
       );
       return;
     }

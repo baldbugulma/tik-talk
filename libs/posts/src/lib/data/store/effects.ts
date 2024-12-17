@@ -28,4 +28,24 @@ export class PostEffects {
       map(res => postsActions.postsLoaded({posts:res}))
     )
   })
+
+  fetchCreatePost = createEffect(():any =>{
+    return this.actions$.pipe(
+      ofType(postsActions.createPost),
+      switchMap(({payload}) =>{
+        return this.postService.createPost(payload)
+      }),
+      map(res => postsActions.postsLoaded({posts:res}))
+    )
+  })
+
+  fetchCommentPost:any = createEffect(():any => {
+    return this.actions$.pipe(
+      ofType(postsActions.createComment),
+      switchMap(({payload}) => {
+        return this.postService.createComment(payload)
+      }),
+      map(res => postsActions.postsLoaded({posts:res}))
+    )
+  })
 }

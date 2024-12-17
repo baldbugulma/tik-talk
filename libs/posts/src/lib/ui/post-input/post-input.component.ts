@@ -75,6 +75,7 @@ export class PostInputComponent {
     this.data.isCommentInput = this.isCommentInput();
 
     this.outDataPost.emit(this.data);
+    this.postText = ''
   }
   //   onCreatePost(){
   //     if(!this.postText) return
