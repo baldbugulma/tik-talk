@@ -31,17 +31,16 @@ export class ProfileFiltersComponent {
   })
 
   constructor() {
-
-    effect(() => {
-      const filters = this.selectFilters();
-      if (filters) {
-        this.searchForm.patchValue(filters, { emitEvent: false });
-      }
-    });
+    const filters = this.selectFilters();
+    console.log(filters)
+    if (filters) {
+      this.searchForm.patchValue(filters, { emitEvent: false });
+    }
+    const startValue = filters ? filters : {}
 
     this.searchForm.valueChanges
       .pipe(
-        startWith({}),
+        startWith(startValue),
         debounceTime(300),
       )
       .subscribe(formValue => {
