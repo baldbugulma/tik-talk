@@ -14,6 +14,8 @@ import { FormsModule } from '@angular/forms';
 import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui";
 
 import {GlobalStoreService} from "@tt/shared";
+import {selectMe} from "@tt/profile";
+import {Store} from "@ngrx/store";
 
 
 
@@ -26,8 +28,10 @@ import {GlobalStoreService} from "@tt/shared";
 })
 export class PostInputComponent {
 
+  store = inject(Store)
+
   r2 = inject(Renderer2);
-  profile = inject(GlobalStoreService).me;
+  profile = this.store.selectSignal(selectMe);
 
 
   isCommentInput = input<boolean>(false);

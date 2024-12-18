@@ -12,11 +12,12 @@ import { Profile } from '@tt/interfaces/profile';
   providedIn: 'root',
 })
 export class ProfileService {
+
   http: HttpClient = inject(HttpClient);
   #globalStoreService = inject(GlobalStoreService)
   baseApiUrl: string = 'https://icherniakov.ru/yt-course/';
 
-  me = signal<Profile | null>(null);
+  //me = signal<Profile | null>(null);
   filteredProfiles = signal<Profile[]>([]);
 
   getTestAccounts() {
@@ -36,11 +37,11 @@ export class ProfileService {
   getMe() {
     return this.http
       .get<Profile>(`${this.baseApiUrl}account/me`)
-      .pipe(tap((res) => {
-        this.me.set(res)
-        this.#globalStoreService.me.set(res)
-        }
-      ));
+      // .pipe(tap((res) => {
+      //   this.me.set(res)
+      //   this.#globalStoreService.me.set(res)
+      //   }
+      // ));
   }
 
   patchProfile(profile: Partial<Profile>) {

@@ -6,6 +6,8 @@ import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.c
 import { ProfileService } from '../../data/services/profile.service';
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component';
 import {Profile} from "@tt/interfaces/profile";
+import {Store} from "@ngrx/store";
+import {selectMe} from "@tt/profile";
 
 @Component({
   selector: 'app-settings-page',
@@ -17,10 +19,11 @@ import {Profile} from "@tt/interfaces/profile";
 export class SettingsPageComponent {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
+  store = inject(Store)
 
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
 
-  me$: Observable<Profile | null> = toObservable(this.profileService.me);
+  me = this.store.selectSignal(selectMe)
 
   form = this.fb.group({
     firstName: [``, Validators.required],
@@ -34,9 +37,9 @@ export class SettingsPageComponent {
     effect(() => {
       //@ts-ignore
       this.form.patchValue({
-        ...this.profileService.me(),
+        ...this.me(),
         //@ts-ignore
-        stack: this.mergeStack(this.profileService.me()?.stack),
+        stack: this.mergeStack(this.me()?.stack),
       });
     });
   }

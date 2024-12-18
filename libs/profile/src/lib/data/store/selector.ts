@@ -10,3 +10,8 @@ export const selectFilters = createSelector(
   profileFeature.selectProfileFilters,
   (profileFilters)=> profileFilters
 )
+
+export const selectMe = createSelector(
+  profileFeature.selectMe,
+  (me)=> me
+)

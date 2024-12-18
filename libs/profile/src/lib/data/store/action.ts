@@ -1,4 +1,4 @@
-import {createActionGroup, props} from "@ngrx/store";
+import {createActionGroup, emptyProps, props} from "@ngrx/store";
 import {Profile} from "@tt/interfaces/profile";
 
 export const profileActions = createActionGroup({
@@ -8,6 +8,9 @@ export const profileActions = createActionGroup({
   events :{
     'filter events': props<{filters: Record<string, any>}>(),
     'profiles loaded': props<{profiles: Profile[]}>(),
-    'save filter': props<{filters: Record<string, any>}>()
+    'save filter': props<{filters: Record<string, any>}>(),
+
+    'fetch getMe': emptyProps(),
+    'save infoMe': props<{profile: Profile}>()
   }
 })

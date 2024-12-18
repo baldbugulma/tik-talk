@@ -4,6 +4,8 @@ import { DndDirective } from '../../../../../common-ui/src/lib/directives/dnd.di
 import { SvgIconComponent } from '../../../../../common-ui/src/lib/components/svg-icon/svg-icon.component';
 import { ProfileService } from '../../data/services/profile.service';
 import { FormsModule } from '@angular/forms';
+import {Store} from "@ngrx/store";
+import {selectMe} from "@tt/profile";
 
 @Component({
   selector: 'app-avatar-upload',
@@ -15,10 +17,12 @@ import { FormsModule } from '@angular/forms';
 export class AvatarUploadComponent {
   avatar: File | null = null;
 
+  store = inject(Store)
+  me = this.store.selectSignal(selectMe)
   profileService = inject(ProfileService);
 
-  previewUrl: string | null | undefined = this.profileService.me()?.avatarUrl
-    ? `https://icherniakov.ru/yt-course/${this.profileService.me()?.avatarUrl}`
+  previewUrl: string | null | undefined = this.me()?.avatarUrl
+    ? `https://icherniakov.ru/yt-course/${this.me()?.avatarUrl}`
     : `/assets/imgs/avatar-placeholder.png`;
 
   preview = signal<string>(`${this.previewUrl}`);

@@ -7,15 +7,17 @@ import {
   LastMessageRes,
   Message,
 } from '../interfaces/chat.interface';
-import {ProfileService} from "@tt/profile";
+import {ProfileService, selectMe} from "@tt/profile";
+import {Store} from "@ngrx/store";
 
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatsService {
+  store = inject(Store)
   http = inject(HttpClient);
-  me = inject(ProfileService).me;
+  me = this.store.selectSignal(selectMe)
 
   activeChatMessages = signal<GroupedMessage[]>([]);
 

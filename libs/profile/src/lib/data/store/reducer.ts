@@ -4,12 +4,14 @@ import {profileActions} from "./action";
 
 export interface ProfileState{
   profiles: Profile[],
-  profileFilters: Record<string, any>
+  profileFilters: Record<string, any>,
+  me: Profile | null
 }
 
 export const initialState: ProfileState = {
   profiles: [],
-  profileFilters: {}
+  profileFilters: {},
+  me: null
 }
 
 
@@ -34,6 +36,13 @@ export const profileFeature = createFeature({
         ...state,
         profileFilters: filters
       };
+    }),
+
+    on(profileActions.saveInfoMe, (state: ProfileState, {profile}) => {
+      return {
+        ...state,
+        me: profile
+      }
     })
   )
 })

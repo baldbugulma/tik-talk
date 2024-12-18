@@ -15,15 +15,14 @@ import {provideState} from "@ngrx/store";
 import {provideEffects} from "@ngrx/effects";
 import {PostEffects, postsFeature} from "../../../../libs/posts/src/lib/data";
 
-
-
-
-
-
 export const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    providers: [
+      provideState(profileFeature),
+      provideEffects(ProfileEffects)
+    ],
     children: [
       { path: '', redirectTo: 'profile/me', pathMatch: 'full' },
       {

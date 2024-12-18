@@ -10,6 +10,7 @@ export const postsActions = createActionGroup({
     'fetch posts': props<{posts?: Post[]}>(),
     'posts loaded': props<{posts: Post[]}>(),
     'create post' : props<{payload: PostCreateDto}>(),
+
     'create comment': props<{payload: CommentCreateDto}>()
   }
 })

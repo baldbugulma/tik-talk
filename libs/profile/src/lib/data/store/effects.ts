@@ -15,12 +15,9 @@ export class ProfileEffects {
   // Создаем эффект для фильтрации профилей.
   filterProfiles = createEffect(() => {
     return this.actions$.pipe(
-      // Если action равен filterEvents то делаем дальше.
       ofType(profileActions.filterEvents),
-      // Переключаемся на другой поток, вызываем метод фильтрации с переданными параметрами
       switchMap(({ filters }) => {
         return this.profileService.filterProfiles(filters).pipe(
-          // Возвращаем два действия последовательно
           concatMap((res) => [
             profileActions.profilesLoaded({ profiles: res.items }),
             profileActions.saveFilter({ filters }),
@@ -29,4 +26,18 @@ export class ProfileEffects {
       })
     );
   });
+
+ //Получаем информацию о собственном профиле
+  getMe = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(profileActions.fetchGetMe),
+      switchMap(() =>
+        this.profileService.getMe().pipe(
+          map((profile) => profileActions.saveInfoMe({profile}))
+        ))
+      )
+  });
+
+
+
 }
