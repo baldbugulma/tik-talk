@@ -1,12 +1,13 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import {Component, ElementRef, inject, Renderer2, ViewChild} from '@angular/core';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { map, startWith, switchMap } from 'rxjs';
+import {fromEvent, interval, map, startWith, switchMap} from 'rxjs';
 
 
 import { ChatsBtnComponent, ChatsService } from '@tt/chats';
+import {audit} from "rxjs/operators";
 
 @Component({
   selector: 'app-chats-list',
@@ -25,6 +26,29 @@ export class ChatsListComponent {
   // Внедрение сервиса ChatsService с помощью DI
   chatsService = inject(ChatsService);
 
+  r2 = inject(Renderer2)
+
+  hostElement = inject(ElementRef)
+
+  @ViewChild('buttonsWrapper', { static: false })
+  buttonsWrapper!: ElementRef<HTMLDivElement>;
+
+  ngAfterViewInit() {
+    this.resizeFeed();
+
+    fromEvent(window, 'resize')
+      .pipe(audit(() => interval(500)))
+      .subscribe((event) => {
+        this.resizeFeed();
+      });
+  }
+
+  resizeFeed() {
+    const { top } = this.hostElement.nativeElement.getBoundingClientRect();
+
+    const height = window.innerHeight - top - 120;
+    this.r2.setStyle(this.buttonsWrapper.nativeElement, 'height', `${height}px`);
+  }
   // Создание FormControl для фильтрации чатов
   filterChatsControll = new FormControl(''); // Начальное значение - пустая строка
 

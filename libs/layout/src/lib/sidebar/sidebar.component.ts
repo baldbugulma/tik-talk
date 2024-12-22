@@ -50,7 +50,6 @@ export class SidebarComponent {
 
   ngOnInit() {
     this.store.dispatch(profileActions.fetchGetMe())
-    console.log(this.me)
     // firstValueFrom(this.profileService.getMe());
   }
 }
