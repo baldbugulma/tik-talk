@@ -9,13 +9,10 @@ import {
 import { firstValueFrom, fromEvent, interval, timer } from 'rxjs';
 import { audit, switchMap } from 'rxjs/operators';
 
-
-
-
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
-import {ChatsService, MessageInputComponent} from "@tt/chats";
-import {FormatDatePipe} from "@tt/common-ui";
-import {Chat} from "../../../data/interfaces/chat.interface";
+import { ChatsService, MessageInputComponent } from '@tt/chats';
+import { FormatDatePipe } from '@tt/common-ui';
+import { Chat } from '../../../data/interfaces/chat.interface';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',
@@ -64,9 +61,10 @@ export class ChatWorkspaceMessagesWrapperComponent {
   }
 
   async onSendMessage(messageText: string) {
-    await firstValueFrom(
-      this.chatsService.sendMessage(this.chat().id, messageText)
-    );
+    this.chatsService.wsAdapter.sendMessage(messageText, this.chat().id);
+    // await firstValueFrom(
+    //  this.chatsService.sendMessage(this.chat().id, messageText)
+    // );
     await this.getNewMessage();
     setTimeout(() => this.scrollToBottom());
   }

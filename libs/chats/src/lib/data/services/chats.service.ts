@@ -1,30 +1,89 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import {
   Chat,
   GroupedMessage,
   LastMessageRes,
   Message,
 } from '../interfaces/chat.interface';
-import {ProfileService, selectMe} from "@tt/profile";
-import {Store} from "@ngrx/store";
-
+import { selectMe } from '@tt/profile';
+import { Store } from '@ngrx/store';
+import { ChatWsService } from '../interfaces/chat-ws-service.interface';
+import { AuthService } from '@tt/auth';
+import { ChatWSMessage } from '../interfaces/chat-messsage.interface';
+import { isNewMessage, isUnreadMessage } from '../interfaces/type-guards';
+import { ChatWsRxjsService } from './chat-ws-rxjs.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatsService {
-  store = inject(Store)
+  store = inject(Store);
   http = inject(HttpClient);
-  me = this.store.selectSignal(selectMe)
+  #authService = inject(AuthService);
+  me = this.store.selectSignal(selectMe);
+
+  wsAdapter: ChatWsService = new ChatWsRxjsService();
 
   activeChatMessages = signal<GroupedMessage[]>([]);
 
   baseApiUrl: string = 'https://icherniakov.ru/yt-course/';
-
   chatsUrl = `${this.baseApiUrl}chat/`;
   messageUrl = `${this.baseApiUrl}message/`;
+
+  connectWs() {
+    return this.wsAdapter.connect({
+      url: `${this.baseApiUrl}chat/ws`,
+      token: this.#authService.token ?? '',
+      handleMessage: this.handleWSMessage,
+    }) as Observable<ChatWSMessage>;
+  }
+
+  handleWSMessage = (message: ChatWSMessage) => {
+    if (!('action' in message)) return;
+
+    if (isUnreadMessage(message)) {
+      // TODO счетчик непрочитанных сообщений
+    }
+
+    if (isNewMessage(message)) {
+      const newMessage: Message = {
+        id: message.data.id,
+        userFromId: message.data.author,
+        personalChatId: message.data.chat_id,
+        text: message.data.message,
+        createdAt: message.data.created_at,
+        isRead: false,
+        isMine: false,
+      };
+
+      const messageDate = newMessage.createdAt.split(' ')[0];
+      const currentMessages = this.activeChatMessages();
+
+      // Поиск группы сообщений по дате
+      const groupIndex = currentMessages.findIndex(
+        (group) => group.date === messageDate
+      );
+
+      if (groupIndex !== -1) {
+        // Если группа с такой датой существует, добавляем сообщение в эту группу
+        currentMessages[groupIndex].messages.push(newMessage);
+      } else {
+        // Если группа не существует, создаём новую
+        currentMessages.push({
+          date: messageDate,
+          messages: [newMessage],
+        });
+      }
+
+      // Сортируем группы по дате (опционально)
+      currentMessages.sort((a, b) => a.date.localeCompare(b.date));
+
+      // Обновляем сигнал
+      this.activeChatMessages.set([...currentMessages]);
+    }
+  };
 
   createChat(userId: number) {
     return this.http.post<Chat>(`${this.chatsUrl}${userId}`, {});
@@ -79,7 +138,7 @@ export class ChatsService {
     );
   }
 
-  sendMessage(chatId: number, message: string) {
+  sendMessage(message: string, chatId: number) {
     return this.http.post<Message>(
       `${this.messageUrl}send/${chatId}`,
       {},

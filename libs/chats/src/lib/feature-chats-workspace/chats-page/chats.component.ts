@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import {ChatsListComponent} from "@tt/chats";
-
+import { ChatsListComponent, ChatsService } from '@tt/chats';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-chats',
@@ -10,4 +10,10 @@ import {ChatsListComponent} from "@tt/chats";
   templateUrl: './chats.component.html',
   styleUrl: './chats.component.scss',
 })
-export class ChatsPageComponent {}
+export class ChatsPageComponent {
+  #chatService = inject(ChatsService);
+
+  constructor() {
+    this.#chatService.connectWs().pipe(takeUntilDestroyed()).subscribe();
+  }
+}
