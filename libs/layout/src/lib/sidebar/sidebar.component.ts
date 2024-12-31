@@ -2,11 +2,17 @@ import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
-import { profileActions, ProfileService, selectMe } from '@tt/profile';
+
 import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui';
 import { Store } from '@ngrx/store';
-import { ChatsService } from '@tt/chats';
+
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import {
+  profileActions,
+  ProfileService,
+  selectMe,
+} from '@tt/data-access/profile';
+import { ChatsService } from '@tt/data-access/chats';
 
 @Component({
   selector: 'app-sidebar',

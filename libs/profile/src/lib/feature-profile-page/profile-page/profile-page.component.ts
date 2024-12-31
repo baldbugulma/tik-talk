@@ -1,15 +1,14 @@
 import { AsyncPipe } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import {firstValueFrom, Observable, of, switchMap} from 'rxjs';
-import {PostFeedComponent} from "@tt/posts";
-import {ProfileService, selectMe} from "../../data";
-import {ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
-import {ProfileHeaderComponent} from "../../ui"
-import { Profile } from '@tt/interfaces/profile';
-import {Store} from "@ngrx/store";
+import { Observable, of, switchMap } from 'rxjs';
+import { PostFeedComponent } from '@tt/posts';
 
+import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui';
+import { ProfileHeaderComponent } from '../../ui';
+
+import { Store } from '@ngrx/store';
+import { Profile, ProfileService, selectMe } from '@tt/data-access/profile';
 
 @Component({
   selector: 'app-profile-page',
@@ -31,11 +30,11 @@ export class ProfilePageComponent {
   route = inject(ActivatedRoute);
   router = inject(Router);
 
-  store = inject(Store)
+  store = inject(Store);
 
   isMyPage = signal(false);
 
-  me = this.store.selectSignal(selectMe)
+  me = this.store.selectSignal(selectMe);
 
   subscribers$ = this.profileService.getSubscribersShortList(5);
 
@@ -52,6 +51,6 @@ export class ProfilePageComponent {
     })
   );
   async sendMessag(userId: number) {
-    this.router.navigate([`/chats`, 'new'], {queryParams: {userId}});
+    this.router.navigate([`/chats`, 'new'], { queryParams: { userId } });
   }
 }

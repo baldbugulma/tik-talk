@@ -1,14 +1,12 @@
 import { Component, Input } from '@angular/core';
-import { RouterLink } from '@angular/router';
 
-
-import {Profile} from "@tt/profile";
-import {ImgUrlPipe} from "@tt/common-ui";
+import { ImgUrlPipe } from '@tt/common-ui';
+import { Profile } from '@tt/data-access/profile';
 
 @Component({
   selector: 'app-subscriber-card',
   standalone: true,
-  imports: [ImgUrlPipe, RouterLink],
+  imports: [ImgUrlPipe],
   templateUrl: './subscriber-card.component.html',
   styleUrl: './subscriber-card.component.scss',
 })

@@ -1,4 +1,5 @@
-import {Profile} from "@tt/interfaces/profile";
+import { Profile } from 'libs/data-access/src';
+
 
 
 export interface PostCreateDto {

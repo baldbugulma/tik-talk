@@ -1,13 +1,11 @@
 import { Component, effect, inject, ViewChild } from '@angular/core';
-import { toObservable } from '@angular/core/rxjs-interop';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { firstValueFrom, Observable } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.component';
-import { ProfileService } from '../../data/services/profile.service';
+import { ProfileService } from '@tt/data-access/profile/services/profile.service';
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component';
-import {Profile} from "@tt/interfaces/profile";
-import {Store} from "@ngrx/store";
-import {selectMe} from "@tt/profile";
+import { Store } from '@ngrx/store';
+import { selectMe } from '@tt/data-access/profile';
 
 @Component({
   selector: 'app-settings-page',
@@ -19,11 +17,11 @@ import {selectMe} from "@tt/profile";
 export class SettingsPageComponent {
   fb = inject(FormBuilder);
   profileService = inject(ProfileService);
-  store = inject(Store)
+  store = inject(Store);
 
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
 
-  me = this.store.selectSignal(selectMe)
+  me = this.store.selectSignal(selectMe);
 
   form = this.fb.group({
     firstName: [``, Validators.required],

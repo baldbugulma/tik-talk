@@ -10,14 +10,10 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui';
 
-import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui";
-
-import {GlobalStoreService} from "@tt/shared";
-import {selectMe} from "@tt/profile";
-import {Store} from "@ngrx/store";
-
-
+import { Store } from '@ngrx/store';
+import { selectMe } from '@tt/data-access/profile';
 
 @Component({
   selector: 'app-post-input',
@@ -27,12 +23,10 @@ import {Store} from "@ngrx/store";
   styleUrl: './post-input.component.scss',
 })
 export class PostInputComponent {
-
-  store = inject(Store)
+  store = inject(Store);
 
   r2 = inject(Renderer2);
   profile = this.store.selectSignal(selectMe);
-
 
   isCommentInput = input<boolean>(false);
   postId = input<number>(0);
@@ -79,7 +73,7 @@ export class PostInputComponent {
     this.data.isCommentInput = this.isCommentInput();
 
     this.outDataPost.emit(this.data);
-    this.postText = ''
+    this.postText = '';
   }
   //   onCreatePost(){
   //     if(!this.postText) return

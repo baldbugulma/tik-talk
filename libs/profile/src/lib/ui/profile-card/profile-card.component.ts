@@ -1,8 +1,8 @@
-import {Component, inject, Input} from '@angular/core';
-import {ImgUrlPipe, SvgIconComponent} from '@tt/common-ui';
+import { Component, inject, Input } from '@angular/core';
+import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui';
 
-import {Profile} from "@tt/interfaces/profile";
-import {Router, RouterLink} from "@angular/router";
+import { Router, RouterLink } from '@angular/router';
+import { Profile } from '@tt/data-access/profile';
 
 @Component({
   selector: 'app-profile-card',
@@ -12,12 +12,11 @@ import {Router, RouterLink} from "@angular/router";
   styleUrl: './profile-card.component.scss',
 })
 export class ProfileCardComponent {
-
   router = inject(Router);
 
   @Input() profile!: Profile;
 
   async sendMessage(userId: number) {
-    this.router.navigate([`/chats`, 'new'], {queryParams: {userId}});
+    this.router.navigate([`/chats`, 'new'], { queryParams: { userId } });
   }
 }

@@ -1,12 +1,11 @@
 import { Component, input } from '@angular/core';
-import { Profile } from '../../../../../interfaces/src/lib/profile/profile.interface';
-import { ImgUrlPipe } from '../../../../../common-ui/src/lib/pipes/img-url.pipe';
+import { Profile } from '@tt/data-access/profile/interfaces/profile.interface';
 import { AvatarCircleComponent } from '../../../../../common-ui/src/lib/components/avatar-circle/avatar-circle.component';
 
 @Component({
   selector: 'app-profile-header',
   standalone: true,
-  imports: [ImgUrlPipe, AvatarCircleComponent],
+  imports: [AvatarCircleComponent],
   templateUrl: './profile-header.component.html',
   styleUrl: './profile-header.component.scss',
 })

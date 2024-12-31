@@ -12,7 +12,7 @@ import { audit, switchMap } from 'rxjs/operators';
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { ChatsService, MessageInputComponent } from '@tt/chats';
 import { FormatDatePipe } from '@tt/common-ui';
-import { Chat } from '../../../data/interfaces/chat.interface';
+import { Chat } from '@tt/data-access/chats/interfaces/chat.interface';
 
 @Component({
   selector: 'app-chat-workspace-messages-wrapper',

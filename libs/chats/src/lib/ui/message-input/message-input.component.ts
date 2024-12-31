@@ -7,12 +7,9 @@ import {
   Renderer2,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-
-
-import {ProfileService, selectMe} from "@tt/profile";
-import {AvatarCircleComponent, SvgIconComponent} from "@tt/common-ui";
-import {Store} from "@ngrx/store";
+import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui';
+import { Store } from '@ngrx/store';
+import { selectMe } from '@tt/data-access/profile';
 
 @Component({
   selector: 'app-message-input',
@@ -24,8 +21,8 @@ import {Store} from "@ngrx/store";
 export class MessageInputComponent {
   r2 = inject(Renderer2);
 
-  store = inject(Store)
-  me = this.store.selectSignal(selectMe)
+  store = inject(Store);
+  me = this.store.selectSignal(selectMe);
   @Output() created = new EventEmitter<string>();
 
   postText: string = '';
