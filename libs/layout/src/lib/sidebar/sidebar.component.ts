@@ -1,11 +1,12 @@
-import { AsyncPipe, JsonPipe, NgFor } from '@angular/common';
+import { AsyncPipe, NgFor } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import { firstValueFrom } from 'rxjs';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
-import {profileActions, ProfileService, selectMe} from "@tt/profile";
-import {ImgUrlPipe, SvgIconComponent} from "@tt/common-ui";
-import {Store} from "@ngrx/store";
+import { profileActions, ProfileService, selectMe } from '@tt/profile';
+import { ImgUrlPipe, SvgIconComponent } from '@tt/common-ui';
+import { Store } from '@ngrx/store';
+import { ChatsService } from '@tt/chats';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-sidebar',
@@ -24,11 +25,15 @@ import {Store} from "@ngrx/store";
 })
 export class SidebarComponent {
   profileService: ProfileService = inject(ProfileService);
+  #chatService = inject(ChatsService);
+
+  unreadMessageCount = this.#chatService.unreadMessages;
+
   subscribers$ = this.profileService.getSubscribersShortList();
 
-  store = inject(Store)
+  store = inject(Store);
 
-  me = this.store.selectSignal(selectMe)
+  me = this.store.selectSignal(selectMe);
 
   menuItems: any[] = [
     {
@@ -48,8 +53,13 @@ export class SidebarComponent {
     },
   ];
 
+  constructor() {
+    this.#chatService.connectWs().pipe(takeUntilDestroyed()).subscribe();
+    console.log('Непрочитаные сообщения' + this.unreadMessageCount);
+  }
+
   ngOnInit() {
-    this.store.dispatch(profileActions.fetchGetMe())
+    this.store.dispatch(profileActions.fetchGetMe());
     // firstValueFrom(this.profileService.getMe());
   }
 }

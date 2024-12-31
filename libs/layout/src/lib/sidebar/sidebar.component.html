@@ -10,7 +10,13 @@
       >
         <svg [icon]="menuItem.icon"></svg>
         <span>{{ menuItem.label }}</span>
-        <span></span>
+        @if(menuItem.label === 'Чаты')
+        {
+          @if(unreadMessageCount() > 0){
+            <span>{{unreadMessageCount() }}</span>
+          }
+        }
+
       </a>
     </li>
   </ul>

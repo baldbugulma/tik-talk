@@ -5,7 +5,7 @@
   border-bottom: var(--light-border);
   padding: 24px 20px;
   display: grid;
-  grid-template-columns: 32px 1fr;
+  grid-template-columns: 32px 1fr 26px;
   grid-gap: 16px;
   cursor: pointer;
 }
@@ -22,6 +22,17 @@
   gap: 16px;
   text-align: left;
   color: var(--light-color);
+}
+
+.unread-message{
+  height: 18px;
+  background-color: var(--primary-color);
+  align-self: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 12px;
 }
 
 .chat-user {

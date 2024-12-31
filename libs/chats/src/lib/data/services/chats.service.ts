@@ -26,6 +26,8 @@ export class ChatsService {
 
   wsAdapter: ChatWsService = new ChatWsRxjsService();
 
+  unreadMessages = signal<number>(0);
+
   activeChatMessages = signal<GroupedMessage[]>([]);
 
   baseApiUrl: string = 'https://icherniakov.ru/yt-course/';
@@ -44,7 +46,8 @@ export class ChatsService {
     if (!('action' in message)) return;
 
     if (isUnreadMessage(message)) {
-      // TODO счетчик непрочитанных сообщений
+      this.unreadMessages.set(message.data.count);
+      console.log(`Количество непрочитанных сообщений` + this.unreadMessages);
     }
 
     if (isNewMessage(message)) {
@@ -77,7 +80,6 @@ export class ChatsService {
         });
       }
 
-      // Сортируем группы по дате (опционально)
       currentMessages.sort((a, b) => a.date.localeCompare(b.date));
 
       // Обновляем сигнал
