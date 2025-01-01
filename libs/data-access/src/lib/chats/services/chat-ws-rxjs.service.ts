@@ -1,11 +1,12 @@
+import { WebSocketSubject } from 'rxjs/internal/observable/dom/WebSocketSubject';
+
+import { webSocket } from 'rxjs/webSocket';
+import { finalize, Observable, tap } from 'rxjs';
+import { ChatWSMessage } from '../interfaces/chat-messsage.interface';
 import {
   ChatConnectionWsParams,
   ChatWsService,
-} from '@tt/data-access/chats/interfaces/chat-ws-service.interface';
-import { WebSocketSubject } from 'rxjs/internal/observable/dom/WebSocketSubject';
-import { ChatWSMessage } from '@tt/data-access/chats/interfaces/chat-messsage.interface';
-import { webSocket } from 'rxjs/webSocket';
-import { finalize, Observable, tap } from 'rxjs';
+} from '../interfaces/chat-ws-service.interface';
 
 export class ChatWsRxjsService implements ChatWsService {
   #socket: WebSocketSubject<ChatWSMessage> | null = null;

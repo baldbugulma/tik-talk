@@ -43,6 +43,14 @@ export class ChatsService {
     }) as Observable<ChatWSMessage>;
   }
 
+  disconnectWs() {
+    return this.wsAdapter.disconnect();
+  }
+
+  refreshToken() {
+    return this.#authService.refreshAuthToken();
+  }
+
   handleWSMessage = (message: ChatWSMessage) => {
     if (!('action' in message)) return;
 
