@@ -1,5 +1,6 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+// import {MessageInputComponent} from "../../ui/message-input/message-input.component"
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of, switchMap } from 'rxjs';
 
@@ -7,11 +8,8 @@ import { ChatWorkspaceHeaderComponent } from './chat-workspace-header/chat-works
 import { ChatWorkspaceMessagesWrapperComponent } from './chat-workspace-messages-wrapper/chat-workspace-messages-wrapper.component';
 import { ChatsService } from '@tt/data-access/chats/services/chats.service';
 
-// import {MessageInputComponent} from "../../ui/message-input/message-input.component"
-
-import { ChangeDetectionStrategy } from '@angular/core';
-
-@Component({selector: 'app-chat-workspace',
+@Component({
+  selector: 'app-chat-workspace',
   standalone: true,
   imports: [
     ChatWorkspaceHeaderComponent,
@@ -21,7 +19,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
   ],
   templateUrl: './chat-workspace.component.html',
   styleUrl: './chat-workspace.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatWorkspaceComponent {
   route = inject(ActivatedRoute);

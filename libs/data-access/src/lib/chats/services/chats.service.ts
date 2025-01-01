@@ -23,7 +23,9 @@ export class ChatsService {
   store = inject(Store);
   http = inject(HttpClient);
   #authService = inject(AuthService);
+
   me = this.store.selectSignal(selectMe);
+  activeChat = signal<Chat | null>(null);
 
   wsAdapter: ChatWsService = new ChatWsRxjsService();
 
@@ -47,12 +49,10 @@ export class ChatsService {
     return this.wsAdapter.disconnect();
   }
 
-  refreshToken() {
-    return this.#authService.refreshAuthToken();
-  }
-
   handleWSMessage = (message: ChatWSMessage) => {
     if (!('action' in message)) return;
+
+    const activeChat = this.activeChat();
 
     if (isUnreadMessage(message)) {
       this.unreadMessages.set(message.data.count);
@@ -68,11 +68,16 @@ export class ChatsService {
         createdAt: message.data.created_at,
         isRead: false,
         isMine: false,
+        user:
+          activeChat?.userFirst.id === message.data.author
+            ? activeChat?.userFirst
+            : activeChat?.userSecond,
       };
 
       const messageDate = newMessage.createdAt.split(' ')[0];
       const currentMessages = this.activeChatMessages();
 
+      console.log(newMessage);
       // Поиск группы сообщений по дате
       const groupIndex = currentMessages.findIndex(
         (group) => group.date === messageDate
@@ -88,8 +93,6 @@ export class ChatsService {
           messages: [newMessage],
         });
       }
-
-      currentMessages.sort((a, b) => a.date.localeCompare(b.date));
 
       // Обновляем сигнал
       this.activeChatMessages.set([...currentMessages]);
@@ -107,6 +110,7 @@ export class ChatsService {
   getChatById(chatId: number) {
     return this.http.get<Chat>(`${this.chatsUrl}${chatId}`).pipe(
       map((chat) => {
+        this.activeChat.set(chat);
         const patchedMessages = chat.messages.map((message) => {
           return {
             ...message,

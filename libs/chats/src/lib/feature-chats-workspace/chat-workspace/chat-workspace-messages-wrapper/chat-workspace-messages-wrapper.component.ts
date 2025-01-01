@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ElementRef,
   inject,
@@ -6,17 +7,16 @@ import {
   Renderer2,
   ViewChild,
 } from '@angular/core';
-import { firstValueFrom, fromEvent, interval, timer } from 'rxjs';
-import { audit, switchMap } from 'rxjs/operators';
+import { firstValueFrom, fromEvent, interval } from 'rxjs';
+import { audit } from 'rxjs/operators';
 
 import { ChatWorkspaceMessageComponent } from './chat-workspace-message/chat-workspace-message.component';
 import { ChatsService, MessageInputComponent } from '@tt/chats';
 import { FormatDatePipe } from '@tt/common-ui';
 import { Chat } from '@tt/data-access/chats/interfaces/chat.interface';
 
-import { ChangeDetectionStrategy } from '@angular/core';
-
-@Component({selector: 'app-chat-workspace-messages-wrapper',
+@Component({
+  selector: 'app-chat-workspace-messages-wrapper',
   standalone: true,
   imports: [
     ChatWorkspaceMessageComponent,
@@ -25,7 +25,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
   ],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ChatWorkspaceMessagesWrapperComponent {
   chatsService = inject(ChatsService);
@@ -38,12 +38,6 @@ export class ChatWorkspaceMessagesWrapperComponent {
 
   @ViewChild('messagesWrapper', { static: false })
   messagesWrapper!: ElementRef<HTMLDivElement>;
-
-  ngOnInit() {
-    timer(0, 100000)
-      .pipe(switchMap(() => this.getNewMessage()))
-      .subscribe();
-  }
 
   ngAfterViewInit() {
     this.resizeFeed();

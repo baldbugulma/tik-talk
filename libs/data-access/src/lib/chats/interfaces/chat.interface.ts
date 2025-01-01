@@ -17,7 +17,7 @@ export interface Message {
   createdAt: string;
   isRead: boolean;
   updatedAt?: string;
-  user?: Profile;
+  user?: Profile | null;
   isMine: boolean;
 }
 
