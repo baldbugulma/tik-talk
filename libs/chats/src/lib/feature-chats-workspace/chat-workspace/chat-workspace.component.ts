@@ -9,8 +9,9 @@ import { ChatsService } from '@tt/data-access/chats/services/chats.service';
 
 // import {MessageInputComponent} from "../../ui/message-input/message-input.component"
 
-@Component({
-  selector: 'app-chat-workspace',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-chat-workspace',
   standalone: true,
   imports: [
     ChatWorkspaceHeaderComponent,
@@ -20,6 +21,7 @@ import { ChatsService } from '@tt/data-access/chats/services/chats.service';
   ],
   templateUrl: './chat-workspace.component.html',
   styleUrl: './chat-workspace.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceComponent {
   route = inject(ActivatedRoute);

@@ -15,12 +15,14 @@ import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui';
 import { Store } from '@ngrx/store';
 import { selectMe } from '@tt/data-access/profile';
 
-@Component({
-  selector: 'app-post-input',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-post-input',
   standalone: true,
   imports: [AvatarCircleComponent, NgIf, SvgIconComponent, FormsModule],
   templateUrl: './post-input.component.html',
   styleUrl: './post-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostInputComponent {
   store = inject(Store);

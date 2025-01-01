@@ -14,8 +14,9 @@ import { ChatsService, MessageInputComponent } from '@tt/chats';
 import { FormatDatePipe } from '@tt/common-ui';
 import { Chat } from '@tt/data-access/chats/interfaces/chat.interface';
 
-@Component({
-  selector: 'app-chat-workspace-messages-wrapper',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-chat-workspace-messages-wrapper',
   standalone: true,
   imports: [
     ChatWorkspaceMessageComponent,
@@ -24,6 +25,7 @@ import { Chat } from '@tt/data-access/chats/interfaces/chat.interface';
   ],
   templateUrl: './chat-workspace-messages-wrapper.component.html',
   styleUrl: './chat-workspace-messages-wrapper.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatWorkspaceMessagesWrapperComponent {
   chatsService = inject(ChatsService);

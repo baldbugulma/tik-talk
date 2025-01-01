@@ -10,8 +10,9 @@ import { ProfileHeaderComponent } from '../../ui';
 import { Store } from '@ngrx/store';
 import { Profile, ProfileService, selectMe } from '@tt/data-access/profile';
 
-@Component({
-  selector: 'app-profile-page',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-profile-page',
   standalone: true,
   imports: [
     ProfileHeaderComponent,
@@ -23,6 +24,7 @@ import { Profile, ProfileService, selectMe } from '@tt/data-access/profile';
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfilePageComponent {
   profileService = inject(ProfileService);

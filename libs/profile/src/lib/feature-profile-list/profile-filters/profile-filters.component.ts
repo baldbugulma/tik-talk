@@ -7,12 +7,14 @@ import { Store } from '@ngrx/store';
 import { selectFilters } from '@tt/data-access/profile/store/selector';
 import { profileActions } from '@tt/data-access/profile/store/action';
 
-@Component({
-  selector: 'app-profile-filters',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-profile-filters',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './profile-filters.component.html',
   styleUrl: './profile-filters.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileFiltersComponent {
   fb = inject(FormBuilder);

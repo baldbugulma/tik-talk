@@ -8,12 +8,14 @@ import {
 import { Router } from '@angular/router';
 import {AuthService} from "@tt/auth";
 
-@Component({
-  selector: 'app-login-page',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-login-page',
   standalone: true,
   imports: [ReactiveFormsModule],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoginPageComponent {
   authService = inject(AuthService);

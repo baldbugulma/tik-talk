@@ -17,8 +17,9 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { AuthService } from '@tt/data-access/auth';
 import { isErrorMessage } from '@tt/data-access/chats/interfaces/type-guards';
 
-@Component({
-  selector: 'app-sidebar',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-sidebar',
   standalone: true,
   imports: [
     SvgIconComponent,
@@ -31,6 +32,7 @@ import { isErrorMessage } from '@tt/data-access/chats/interfaces/type-guards';
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
   profileService: ProfileService = inject(ProfileService);

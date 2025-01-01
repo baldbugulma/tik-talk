@@ -39,12 +39,14 @@ function getAdressForm(initialValue: Address = {}) {
   });
 }
 
-@Component({
-  selector: 'app-forms-experiment',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-forms-experiment',
   standalone: true,
   imports: [ReactiveFormsModule, KeyValuePipe],
   templateUrl: './forms-experiment.component.html',
   styleUrl: './forms-experiment.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormsExperimentComponent {
   fb = inject(FormBuilder);

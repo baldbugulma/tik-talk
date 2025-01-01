@@ -11,12 +11,14 @@ import { AvatarCircleComponent, SvgIconComponent } from '@tt/common-ui';
 import { Store } from '@ngrx/store';
 import { selectMe } from '@tt/data-access/profile';
 
-@Component({
-  selector: 'app-message-input',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-message-input',
   standalone: true,
   imports: [AvatarCircleComponent, NgIf, SvgIconComponent, FormsModule],
   templateUrl: './message-input.component.html',
   styleUrl: './message-input.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MessageInputComponent {
   r2 = inject(Renderer2);

@@ -7,12 +7,14 @@ import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.comp
 import { Store } from '@ngrx/store';
 import { selectMe } from '@tt/data-access/profile';
 
-@Component({
-  selector: 'app-settings-page',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-settings-page',
   standalone: true,
   imports: [ProfileHeaderComponent, ReactiveFormsModule, AvatarUploadComponent],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SettingsPageComponent {
   fb = inject(FormBuilder);

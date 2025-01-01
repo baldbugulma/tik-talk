@@ -6,12 +6,14 @@ import { FormsModule } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { selectMe } from '@tt/data-access/profile';
 
-@Component({
-  selector: 'app-avatar-upload',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-avatar-upload',
   standalone: true,
   imports: [SvgIconComponent, DndDirective, FormsModule],
   templateUrl: './avatar-upload.component.html',
   styleUrl: './avatar-upload.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AvatarUploadComponent {
   avatar: File | null = null;

@@ -6,12 +6,14 @@ import { PostComponent } from '../post/post.component';
 import {postsActions, PostService, selectPosts} from "../../data";
 import {Store} from "@ngrx/store";
 
-@Component({
-  selector: 'app-post-feed',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-post-feed',
   standalone: true,
   imports: [PostInputComponent, PostComponent],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostFeedComponent {
   store = inject(Store)

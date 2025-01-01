@@ -18,8 +18,9 @@ import {AddTimePipe, AvatarCircleComponent, SvgIconComponent} from "@tt/common-u
 
 
 
-@Component({
-  selector: 'app-post',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-post',
   standalone: true,
   imports: [
     AvatarCircleComponent,
@@ -31,6 +32,7 @@ import {AddTimePipe, AvatarCircleComponent, SvgIconComponent} from "@tt/common-u
   ],
   templateUrl: './post.component.html',
   styleUrl: './post.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PostComponent implements OnInit {
   post = input<Post>();

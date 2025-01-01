@@ -9,8 +9,9 @@ import {fromEvent, interval, map, startWith, switchMap} from 'rxjs';
 import { ChatsBtnComponent, ChatsService } from '@tt/chats';
 import {audit} from "rxjs/operators";
 
-@Component({
-  selector: 'app-chats-list',
+import { ChangeDetectionStrategy } from '@angular/core';
+
+@Component({selector: 'app-chats-list',
   standalone: true,
   imports: [
     ChatsBtnComponent,
@@ -21,6 +22,7 @@ import {audit} from "rxjs/operators";
   ],
   templateUrl: './chats-list.component.html',
   styleUrl: './chats-list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChatsListComponent {
   // Внедрение сервиса ChatsService с помощью DI
