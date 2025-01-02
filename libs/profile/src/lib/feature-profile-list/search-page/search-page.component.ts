@@ -9,7 +9,7 @@ import {
   profileActions,
   selectFilteredProfiles,
 } from '@tt/data-access/profile';
-import { InfiniteScrollTriggerComponent } from '@tt/common-ui';
+import { WaIntersectionObserver } from '@ng-web-apis/intersection-observer';
 
 @Component({
   selector: 'app-search-page',
@@ -17,7 +17,7 @@ import { InfiniteScrollTriggerComponent } from '@tt/common-ui';
   imports: [
     ProfileCardComponent,
     ProfileFiltersComponent,
-    InfiniteScrollTriggerComponent,
+    WaIntersectionObserver,
   ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
@@ -32,5 +32,13 @@ export class SearchPageComponent {
 
   timeToFetch() {
     this.store.dispatch(profileActions.setPage({}));
+  }
+
+  onIntersection(entries: IntersectionObserverEntry[]) {
+    if (!entries.length) return;
+
+    if (entries[0].intersectionRatio > 0) {
+      this.timeToFetch();
+    }
   }
 }
