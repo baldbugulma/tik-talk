@@ -9,7 +9,7 @@ import {
   profileActions,
   selectFilteredProfiles,
 } from '@tt/data-access/profile';
-import { WaIntersectionObserver } from '@ng-web-apis/intersection-observer';
+import { InfiniteScrollDirective } from 'ngx-infinite-scroll';
 
 @Component({
   selector: 'app-search-page',
@@ -17,7 +17,7 @@ import { WaIntersectionObserver } from '@ng-web-apis/intersection-observer';
   imports: [
     ProfileCardComponent,
     ProfileFiltersComponent,
-    WaIntersectionObserver,
+    InfiniteScrollDirective,
   ],
   templateUrl: './search-page.component.html',
   styleUrl: './search-page.component.scss',
@@ -40,5 +40,10 @@ export class SearchPageComponent {
     if (entries[0].intersectionRatio > 0) {
       this.timeToFetch();
     }
+  }
+
+  onScroll() {
+    console.log('scroll');
+    this.timeToFetch();
   }
 }
