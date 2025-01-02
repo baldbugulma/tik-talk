@@ -6,12 +6,16 @@ export interface ProfileState {
   profiles: Profile[];
   profileFilters: Record<string, any>;
   me: Profile | null;
+  page: number;
+  size: number;
 }
 
 export const initialState: ProfileState = {
   profiles: [],
   profileFilters: {},
   me: null,
+  page: 1,
+  size: 10,
 };
 
 export const profileFeature = createFeature({
