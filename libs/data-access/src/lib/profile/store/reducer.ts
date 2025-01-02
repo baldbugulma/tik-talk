@@ -31,7 +31,34 @@ export const profileFeature = createFeature({
         // Возвращаем новое состояние с обновлённым списком профилей.
         return {
           ...state,
-          profiles: payload.profiles,
+          profiles: state.profiles.concat(payload.profiles),
+        };
+      }
+    ),
+
+    // Обрабатываем действие 'profilesLoaded'.
+    on(
+      profileActions.filterEvents,
+      (state: ProfileState, payload: { filters: Record<string, any> }) => {
+        // Возвращаем новое состояние с обновлённым списком профилей.
+        return {
+          ...state,
+          profiles: [],
+          page: 1,
+          profileFilters: payload.filters,
+        };
+      }
+    ),
+
+    on(
+      profileActions.setPage,
+      (state: ProfileState, payload: { page?: number }) => {
+        let page = payload.page;
+        if (!page) page = state.page + 1;
+
+        return {
+          ...state,
+          page,
         };
       }
     ),

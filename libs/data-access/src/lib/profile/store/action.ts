@@ -9,6 +9,7 @@ export const profileActions = createActionGroup({
     'filter events': props<{ filters: Record<string, any> }>(),
     'profiles loaded': props<{ profiles: Profile[] }>(),
     'save filter': props<{ filters: Record<string, any> }>(),
+    'set page': props<{ page?: number }>(),
 
     'fetch getMe': emptyProps(),
     'save infoMe': props<{ profile: Profile }>(),
