@@ -67,7 +67,6 @@ export class ChatWorkspaceMessagesWrapperComponent {
 
   async getNewMessage() {
     await firstValueFrom(this.chatsService.getChatById(this.chat().id));
-    await console.log(1);
   }
 
   scrollToBottom() {
