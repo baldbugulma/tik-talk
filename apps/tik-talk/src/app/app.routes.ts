@@ -13,6 +13,7 @@ import { provideState } from '@ngrx/store';
 import { provideEffects } from '@ngrx/effects';
 import { PostEffects, postsFeature } from '../../../../libs/posts/src/lib/data';
 import { ProfileEffects, profileFeature } from '@tt/data-access/profile';
+import { HappyBirtdayFormComponent } from './happy-birthday/happy-birthday-form/happy-birtday-form.component';
 
 export const routes: Routes = [
   {
@@ -45,4 +46,5 @@ export const routes: Routes = [
   },
   { path: 'login', component: LoginPageComponent },
   { path: 'experimental', component: ExperimentalComponent },
+  { path: 'happy-birthday', component: HappyBirtdayFormComponent },
 ];

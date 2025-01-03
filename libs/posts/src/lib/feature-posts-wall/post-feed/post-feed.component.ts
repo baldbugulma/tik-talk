@@ -7,16 +7,18 @@ import {postsActions, PostService, selectPosts} from "../../data";
 import {Store} from "@ngrx/store";
 
 import { ChangeDetectionStrategy } from '@angular/core';
+import { TestDirective } from './test.directive';
 
-@Component({selector: 'app-post-feed',
+@Component({
+  selector: 'app-post-feed',
   standalone: true,
-  imports: [PostInputComponent, PostComponent],
+  imports: [PostInputComponent, PostComponent, TestDirective],
   templateUrl: './post-feed.component.html',
   styleUrl: './post-feed.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PostFeedComponent {
-  store = inject(Store)
+  store = inject(Store);
   postService = inject(PostService);
   feed = this.store.selectSignal(selectPosts);
 
@@ -29,10 +31,7 @@ export class PostFeedComponent {
 
   hostElement = inject(ElementRef);
 
-  constructor() {
-
-  }
-
+  constructor() {}
 
   ngOnInit() {
     this.store.dispatch(postsActions.fetchPosts({}));
@@ -61,24 +60,26 @@ export class PostFeedComponent {
 
     if (!data.text) return;
     if (!data.isCommentInput) {
-      this.store.dispatch(postsActions.createPost({
-        payload: {
-          title: 'Новый пост',
-          content: data.text,
-          authorId: data.authorId,
-        }
-      }));
-
+      this.store.dispatch(
+        postsActions.createPost({
+          payload: {
+            title: 'Новый пост',
+            content: data.text,
+            authorId: data.authorId,
+          },
+        })
+      );
     }
 
     if (data.isCommentInput) {
-          this.store.dispatch(postsActions.createComment({
-            payload:{
-              text: data.text,
-              postId: data.postId,
-              authorId: data.authorId,
-            }
-          })
+      this.store.dispatch(
+        postsActions.createComment({
+          payload: {
+            text: data.text,
+            postId: data.postId,
+            authorId: data.authorId,
+          },
+        })
       );
       return;
     }

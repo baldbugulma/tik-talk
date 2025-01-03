@@ -1,0 +1,128 @@
+<form class="birthday-form"
+      [formGroup]="form"
+      (ngSubmit)="onSubmit($event)">
+
+  <h4 class="h4 mb16">Информация о дне рождении</h4>
+
+  <label class="tt-control-label mb16">
+    Тип мероприятия
+    <select class="tt-input" formControlName="type">
+      <option [value]="ReciverEvent.CHILD">Детский день рождение</option>
+      <option [value]="ReciverEvent.ADULT">Взрослый день рождения</option>
+    </select>
+  </label>
+
+  <label class="tt-control-label mb16">
+    Имя именника
+    <input
+      formControlName="name"
+      type="text"
+      placeholder="Введите имя"
+      class="tt-input">
+  </label>
+  @if(form.controls.name.touched && form.controls.name.hasError('required')) {
+    <small>Это поле обязательно</small>
+  }
+
+
+  <label class="tt-control-label mb16">
+    Фамилия именника
+    <input
+      formControlName="lastName"
+      type="text"
+      placeholder="Введите фамилию"
+      class="tt-input">
+  </label>
+
+  <h4 class="h4 mb16">Место проведения</h4>
+
+  <div class="contact-group" formGroupName="address">
+    <label class="tt-control-label mb16">
+      Город
+      <input
+        formControlName="city"
+        type="text"
+        placeholder="Введите город"
+        class="tt-input">
+    </label>
+    <label class="tt-control-label mb16">
+      Улица
+      <input
+        formControlName="street"
+        type="text"
+        placeholder="Введите улицу"
+        class="tt-input">
+    </label>
+    <label class="tt-control-label mb16">
+      Дом
+      <input
+        formControlName="building"
+        type="text"
+        placeholder="Введите номер дома"
+        class="tt-input">
+    </label>
+    <label class="tt-control-label mb16">
+      Квартира
+      <input
+        formControlName="apartment"
+        type="text"
+        placeholder="Введите номер квартиры"
+        class="tt-input">
+    </label>
+  </div>
+
+  <div
+    style="display: flex; justify-content: space-between;">
+    <h4 class="h4 mb16">Добавить услугу</h4>
+    <button
+      class="btn"
+      style="width: 50px;" (click)="addService()">+</button>
+  </div>
+
+
+  <div class="service-group">
+    @for(group of form.controls.services.controls; track group; let i = $index){
+      <div class="form-grid" [formGroup]="group">
+        <label class="tt-control-label mb16">
+          Название услуги
+          <input
+            type="text"
+            placeholder="Введите название"
+            class="tt-input"
+            formControlName="nameService">
+        </label>
+        <label class="tt-control-label mb16">
+          Стоимость услуги
+          <input
+            type="text"
+            placeholder="Введите стоимость"
+            class="tt-input"
+            formControlName="costService">
+        </label>
+      </div>
+      <button
+        class="btn mb16"
+        style="grid-column-start: 1; grid-column-end: 3;"
+        (click)="deleteAddres(i)">
+        Удалить
+      </button>
+    }
+
+
+  </div>
+
+  <div class="mb16" [formGroup]="form.controls.feature">
+    <h4 class="h4 mb16">Дополнительно</h4>
+
+    <div style="display: flex; flex-direction: column; gap: 6px;">
+      @for(control of form.controls.feature.controls | keyvalue:sort; track control; let i = $index){
+        <label>
+          {{features[i].label}}
+          <input type="checkbox" [formControlName]="control.key">
+        </label>
+      }
+    </div>
+  </div>
+
+  <button class="btn btn-shadow">Подтвердить</button>
+</form>
