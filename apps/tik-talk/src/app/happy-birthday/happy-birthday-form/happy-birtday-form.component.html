@@ -19,9 +19,10 @@
       type="text"
       placeholder="Введите имя"
       class="tt-input">
+    <small class="validation">Это поле обязательно</small>
   </label>
-  @if(form.controls.name.touched && form.controls.name.hasError('required')) {
-    <small>Это поле обязательно</small>
+  @if(form.controls.name.touched && form.controls.name.hasError('startWith')){
+  <small class="validation">{{form.controls.name.getError('startWith')}}</small>
   }
 
 
@@ -34,7 +35,66 @@
       class="tt-input">
   </label>
 
+  <h4 class="h4 mb16">Дата и время</h4>
+
+  <div class="date-and-time">
+    <label class="tt-control-label mb16">
+      Дата
+      <input
+        formControlName="date"
+        type="text"
+        placeholder="Введите дату"
+        class="tt-input"
+        [maskito]="dateMask">
+    </label>
+
+    <label class="tt-control-label mb16">
+      Время
+      <input
+        formControlName="time"
+        type="text"
+        placeholder="Время"
+        class="tt-input"
+        [maskito]="timeMask"
+        >
+    </label>
+
+    <label class="tt-control-label mb16" style="grid-column-start: 1; grid-column-end: 3">
+      Телефон организатора
+      <input
+        formControlName="phone"
+        type="text"
+        placeholder="Введите телефон"
+        class="tt-input"
+        [maskito]="phoneMask"
+      >
+    </label>
+  </div>
+
+  <div class="two-columns" formGroupName="dateRange">
+    <label class="tt-control-label mb16">
+      От
+      <input
+        formControlName="from"
+        type="date"
+        class="tt-input">
+    </label>
+
+    <label class="tt-control-label mb16">
+      До
+      <input
+        formControlName="to"
+        type="date"
+        class="tt-input">
+    </label>
+  </div>
+
+  @if(form.controls.dateRange.touched && form.controls.dateRange.hasError('dateRange')){
+    <small class="validation">{{form.controls.dateRange.getError('dateRange').message}}</small>
+  }
+
   <h4 class="h4 mb16">Место проведения</h4>
+
 
   <div class="contact-group" formGroupName="address">
     <label class="tt-control-label mb16">

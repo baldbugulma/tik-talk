@@ -3,10 +3,34 @@
   margin: 0 auto;
 }
 
-.contact-group, .form-grid {
+.contact-group, .form-grid, .date-and-time {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-gap: 12px;
 }
 
+.tt-input.ng-invalid.ng-touched{
+  border: 1px solid tomato ;
+}
+
+.validation{
+  color: tomato;
+  margin-top: 4px;
+}
+
+.tt-input.ng-invalid.ng-touched + .validation{
+  display: block;
+
+}
+
+.two-columns{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 12px;
+}
+
+.tt-input::-webkit-calendar-picker-indicator{
+  background: var(--primary-color);
+  cursor: pointer;
+}
 

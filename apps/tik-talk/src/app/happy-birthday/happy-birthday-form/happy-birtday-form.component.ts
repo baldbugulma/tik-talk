@@ -1,16 +1,20 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
+  AbstractControl,
   FormArray,
   FormControl,
   FormGroup,
   FormRecord,
   FormsModule,
   ReactiveFormsModule,
+  ValidatorFn,
   Validators,
 } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Feature, MockService } from './mock.service';
+import { MaskitoDirective } from '@maskito/angular';
+import { dateMask, phoneMask, timeMask } from './mask';
 
 enum ReciverEvent {
   CHILD = 'CHILD',
@@ -31,15 +35,48 @@ function getServicesForm(initialValue: Services = {}) {
   });
 }
 
+function validateStartWith(forbiddenLetter: string): ValidatorFn {
+  return (control: AbstractControl) => {
+    return control.value.startsWith(forbiddenLetter)
+      ? { startWith: `${forbiddenLetter} последняя буква в алфавите ` }
+      : null;
+  };
+}
+
+function validateDateRange({
+  fromControlName,
+  toControlName,
+}: {
+  fromControlName: string;
+  toControlName: string;
+}) {
+  return (control: AbstractControl) => {
+    const fromControl = control.get(fromControlName);
+    const toControl = control.get(toControlName);
+
+    if (!fromControl || !toControl) return null;
+
+    const fromDate = new Date(fromControl.value);
+    const toDate = new Date(toControl.value);
+
+    return fromDate && toDate && fromDate > toDate
+      ? { dateRange: { message: 'дата начала не можеть позднее даты конца' } }
+      : null;
+  };
+}
+
 @Component({
   selector: 'app-happy-birtday-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaskitoDirective],
   templateUrl: './happy-birtday-form.component.html',
   styleUrl: './happy-birtday-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HappyBirtdayFormComponent {
+  readonly phoneMask = phoneMask;
+  readonly dateMask = dateMask;
+  readonly timeMask = timeMask;
   ReciverEvent = ReciverEvent;
   mockService = inject(MockService);
 
@@ -49,9 +86,12 @@ export class HappyBirtdayFormComponent {
     type: new FormControl<ReciverEvent>(ReciverEvent.CHILD),
     name: new FormControl<string>('', [
       Validators.required,
-      Validators.minLength(3),
+      validateStartWith('м'),
     ]),
     lastName: new FormControl<string>(''),
+    date: new FormControl<string>(''),
+    time: new FormControl<string>(''),
+    phone: new FormControl<string>('', [Validators.required]),
     address: new FormGroup({
       city: new FormControl<string>(''),
       street: new FormControl<string>(''),
@@ -60,6 +100,13 @@ export class HappyBirtdayFormComponent {
     }),
     services: new FormArray([getServicesForm()]),
     feature: new FormRecord({}),
+    dateRange: new FormGroup(
+      {
+        from: new FormControl<string>(''),
+        to: new FormControl<string>(''),
+      },
+      validateDateRange({ fromControlName: 'from', toControlName: 'to' })
+    ),
   });
 
   constructor() {
