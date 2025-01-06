@@ -12,7 +12,7 @@ import { ProfileService } from '@tt/data-access/profile/services/profile.service
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component';
 import { Store } from '@ngrx/store';
 import { selectMe } from '@tt/data-access/profile';
-import { StackInputComponent } from '@tt/common-ui';
+import { AddressInputComponent, StackInputComponent } from '@tt/common-ui';
 
 @Component({
   selector: 'app-settings-page',
@@ -22,6 +22,7 @@ import { StackInputComponent } from '@tt/common-ui';
     ReactiveFormsModule,
     AvatarUploadComponent,
     StackInputComponent,
+    AddressInputComponent,
   ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',
@@ -42,6 +43,7 @@ export class SettingsPageComponent {
     username: [{ value: '', disabled: true }, Validators.required],
     description: [''],
     stack: [{ value: '', disabled: false }],
+    city: [null],
   });
 
   constructor() {

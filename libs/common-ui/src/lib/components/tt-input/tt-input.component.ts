@@ -43,7 +43,7 @@ export class TtInputComponent implements ControlValueAccessor {
    * @param val - Новое значение для установки.
    */
   writeValue(val: string | null) {
-    console.log(val); // Логирование значения в консоль (для отладки).
+    this.value = val; // Логирование значения в консоль (для отладки).
   }
 
   /**
