@@ -11,7 +11,7 @@ import { ProfileHeaderComponent } from '../../ui/profile-header/profile-header.c
 import { ProfileService } from '@tt/data-access/profile/services/profile.service';
 import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.component';
 import { Store } from '@ngrx/store';
-import { selectMe } from '@tt/data-access/profile';
+import { Profile, selectMe } from '@tt/data-access/profile';
 import { AddressInputComponent, StackInputComponent } from '@tt/common-ui';
 
 @Component({
@@ -35,7 +35,7 @@ export class SettingsPageComponent {
 
   @ViewChild(AvatarUploadComponent) avatarUploader!: AvatarUploadComponent;
 
-  me = this.store.selectSignal(selectMe);
+  me = this.store.selectSignal<Profile | null>(selectMe);
 
   form = this.fb.group({
     firstName: [``, Validators.required],
@@ -66,7 +66,7 @@ export class SettingsPageComponent {
       );
     }
 
-    console.log(this.avatarUploader.avatar);
+    console.log(this.form.value);
 
     firstValueFrom(
       //@ts-ignore

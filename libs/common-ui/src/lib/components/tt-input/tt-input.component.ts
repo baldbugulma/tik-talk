@@ -1,4 +1,12 @@
-import { Component, forwardRef, input, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
+  Component,
+  forwardRef,
+  inject,
+  input,
+  signal,
+} from '@angular/core';
 import {
   ControlValueAccessor,
   FormsModule,
@@ -11,6 +19,7 @@ import {
   imports: [FormsModule], // Импорты, необходимые для работы компонента
   templateUrl: './tt-input.component.html', // Шаблон компонента
   styleUrl: './tt-input.component.scss', // Стили компонента
+  changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [
     {
       provide: NG_VALUE_ACCESSOR, // Регистрация компонента в Angular формах
@@ -20,6 +29,7 @@ import {
   ],
 })
 export class TtInputComponent implements ControlValueAccessor {
+  cdr = inject(ChangeDetectorRef);
   // Свойство, определяющее тип ввода (text или password), по умолчанию 'text'
   type = input<'text' | 'password'>('text');
 
@@ -44,6 +54,7 @@ export class TtInputComponent implements ControlValueAccessor {
    */
   writeValue(val: string | null) {
     this.value = val; // Логирование значения в консоль (для отладки).
+    this.cdr.detectChanges();
   }
 
   /**
@@ -76,5 +87,6 @@ export class TtInputComponent implements ControlValueAccessor {
    */
   onModelChange(val: string | null): void {
     this.onChange(val); // Вызываем функцию onChange с новым значением.
+    this.cdr.detectChanges();
   }
 }
