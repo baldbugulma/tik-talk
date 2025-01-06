@@ -1,4 +1,9 @@
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -6,16 +11,16 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import {AuthService} from "@tt/auth";
+import { AuthService } from '@tt/auth';
+import { TtInputComponent } from '@tt/common-ui';
 
-import { ChangeDetectionStrategy } from '@angular/core';
-
-@Component({selector: 'app-login-page',
+@Component({
+  selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, TtInputComponent],
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginPageComponent {
   authService = inject(AuthService);
@@ -23,13 +28,16 @@ export class LoginPageComponent {
 
   isPasswordVisible = signal<boolean>(false);
 
-  form = new FormGroup<{
-    username: FormControl<null | string>;
-    password: FormControl<null | string>;
-  }>({
+  form = new FormGroup({
     username: new FormControl<null | string>(null, Validators.required),
     password: new FormControl<null | string>(null, Validators.required),
   });
+
+  ngOnInit() {
+    this.form.valueChanges.subscribe((value: any) => {
+      console.log(value);
+    });
+  }
 
   onSubmit() {
     if (this.form.valid) {
