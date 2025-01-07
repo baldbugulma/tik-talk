@@ -1,5 +1,10 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  signal,
+} from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Observable, of, switchMap } from 'rxjs';
 import { PostFeedComponent } from '@tt/posts';
@@ -10,9 +15,8 @@ import { ProfileHeaderComponent } from '../../ui';
 import { Store } from '@ngrx/store';
 import { Profile, ProfileService, selectMe } from '@tt/data-access/profile';
 
-import { ChangeDetectionStrategy } from '@angular/core';
-
-@Component({selector: 'app-profile-page',
+@Component({
+  selector: 'app-profile-page',
   standalone: true,
   imports: [
     ProfileHeaderComponent,
@@ -24,7 +28,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
   ],
   templateUrl: './profile-page.component.html',
   styleUrl: './profile-page.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ProfilePageComponent {
   profileService = inject(ProfileService);

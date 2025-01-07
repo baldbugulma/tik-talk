@@ -1,5 +1,10 @@
 import { AsyncPipe, NgFor } from '@angular/common';
-import { Component, DestroyRef, inject } from '@angular/core';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  inject,
+} from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 import { SubscriberCardComponent } from './subscriber-card/subscriber-card.component';
 
@@ -17,9 +22,8 @@ import { firstValueFrom, Subscription } from 'rxjs';
 import { AuthService } from '@tt/data-access/auth';
 import { isErrorMessage } from '@tt/data-access/chats/interfaces/type-guards';
 
-import { ChangeDetectionStrategy } from '@angular/core';
-
-@Component({selector: 'app-sidebar',
+@Component({
+  selector: 'app-sidebar',
   standalone: true,
   imports: [
     SvgIconComponent,
@@ -32,7 +36,7 @@ import { ChangeDetectionStrategy } from '@angular/core';
   ],
   templateUrl: './sidebar.component.html',
   styleUrl: './sidebar.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SidebarComponent {
   profileService: ProfileService = inject(ProfileService);
@@ -40,7 +44,6 @@ export class SidebarComponent {
   store = inject(Store);
   destoryRef = inject(DestroyRef);
   authService: AuthService = inject(AuthService);
-
   wsSubscribe!: Subscription;
 
   unreadMessageCount = this.#chatService.unreadMessages;
@@ -89,6 +92,8 @@ export class SidebarComponent {
 
   ngOnInit() {
     this.store.dispatch(profileActions.fetchGetMe());
+
+    console.log('Profile loaded:', this.me());
     // firstValueFrom(this.profileService.getMe());
   }
 }

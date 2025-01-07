@@ -15,6 +15,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Feature, MockService } from './mock.service';
 import { MaskitoDirective } from '@maskito/angular';
 import { dateMask, phoneMask, timeMask } from './mask';
+import { InputRatingComponent } from '../input-rating/input-rating.component';
 
 enum ReciverEvent {
   CHILD = 'CHILD',
@@ -68,7 +69,13 @@ function validateDateRange({
 @Component({
   selector: 'app-happy-birtday-form',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, MaskitoDirective],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MaskitoDirective,
+    InputRatingComponent,
+  ],
   templateUrl: './happy-birtday-form.component.html',
   styleUrl: './happy-birtday-form.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

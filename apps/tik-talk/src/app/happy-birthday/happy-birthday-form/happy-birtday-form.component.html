@@ -4,6 +4,8 @@
 
   <h4 class="h4 mb16">Информация о дне рождении</h4>
 
+  <app-input-rating></app-input-rating>
+
   <label class="tt-control-label mb16">
     Тип мероприятия
     <select class="tt-input" formControlName="type">
@@ -19,7 +21,6 @@
       type="text"
       placeholder="Введите имя"
       class="tt-input">
-    <small class="validation">Это поле обязательно</small>
   </label>
   @if(form.controls.name.touched && form.controls.name.hasError('startWith')){
   <small class="validation">{{form.controls.name.getError('startWith')}}</small>

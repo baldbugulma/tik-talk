@@ -1,0 +1,15 @@
+.rating{
+  display: flex;
+  gap: 5px;
+}
+
+.rating-unactive{
+  fill: white;
+}
+
+.stack-btn__select{
+  border: none;
+  outline: none;
+  background: none;
+  cursor: pointer;
+}
