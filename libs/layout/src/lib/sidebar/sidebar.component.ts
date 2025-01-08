@@ -75,7 +75,7 @@ export class SidebarComponent {
       .pipe(takeUntilDestroyed(this.destoryRef))
       .subscribe((message) => {
         if (isErrorMessage(message)) {
-          console.log('Токен стух' + message);
+          console.log(message);
           this.reconnect();
         }
       });
@@ -86,14 +86,10 @@ export class SidebarComponent {
     this.connect();
   }
 
-  constructor() {
-    this.connect();
-  }
+  constructor() {}
 
   ngOnInit() {
     this.store.dispatch(profileActions.fetchGetMe());
-
-    console.log('Profile loaded:', this.me());
-    // firstValueFrom(this.profileService.getMe());
+    this.connect();
   }
 }

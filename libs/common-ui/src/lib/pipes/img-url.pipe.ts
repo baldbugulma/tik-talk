@@ -7,7 +7,7 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class ImgUrlPipe implements PipeTransform {
   transform(value: string | null): string | null {
     if (!value) {
-      return null;
+      return 'assets/imgs/avatar-placeholder.png';
     }
     return `https://icherniakov.ru/yt-course/${value}`;
   }

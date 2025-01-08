@@ -58,10 +58,12 @@ export class AuthService {
   }
 
   saveTokens(res: TokenResponse) {
+    console.log(`Старый токен: ${this.token}`);
     this.token = res.access_token;
     this.refresh_token = res.refresh_token;
-
+    const cookieOptions = { path: '/' }; // Указываем общий путь для куки
     this.cookieService.set('token', this.token);
     this.cookieService.set('refreshToken', this.refresh_token);
+    console.log(`Новый токен: ${this.token}`);
   }
 }
