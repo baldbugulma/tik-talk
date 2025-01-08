@@ -13,7 +13,7 @@
         @if(menuItem.label === 'Чаты')
         {
           @if(unreadMessageCount() > 0){
-            <span>{{unreadMessageCount() }}</span>
+            <span class="unread-message">{{unreadMessageCount() }}</span>
           }
         }
 

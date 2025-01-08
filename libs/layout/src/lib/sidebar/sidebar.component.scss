@@ -93,3 +93,16 @@
     color: var(--primary-color);
   }
 }
+
+.unread-message{
+  width: 26px;
+  height: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 16px;
+  background: var(--primary-color);
+  color: var(--dark-color);
+}

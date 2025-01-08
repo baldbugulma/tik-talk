@@ -1,4 +1,8 @@
-<app-profile-header [profile]="me()"></app-profile-header>
+<div class="profile-info__wrapper">
+  <app-profile-header [profile]="me()"></app-profile-header>
+  <tt-profile-info [profile]="me()"></tt-profile-info>
+</div>
+
 
 <form class="profile-form__wrapper" [formGroup]="form">
   <div class="profile-form">

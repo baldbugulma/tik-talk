@@ -13,6 +13,7 @@ import { AvatarUploadComponent } from '../../ui/avatar-upload/avatar-upload.comp
 import { Store } from '@ngrx/store';
 import { Profile, selectMe } from '@tt/data-access/profile';
 import { AddressInputComponent, StackInputComponent } from '@tt/common-ui';
+import { ProfileInfoComponent } from '../../ui/profile-info/profile-info.component';
 
 @Component({
   selector: 'app-settings-page',
@@ -23,6 +24,7 @@ import { AddressInputComponent, StackInputComponent } from '@tt/common-ui';
     AvatarUploadComponent,
     StackInputComponent,
     AddressInputComponent,
+    ProfileInfoComponent,
   ],
   templateUrl: './settings-page.component.html',
   styleUrl: './settings-page.component.scss',

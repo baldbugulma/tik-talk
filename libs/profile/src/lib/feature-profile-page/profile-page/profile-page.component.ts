@@ -40,22 +40,26 @@ export class ProfilePageComponent {
 
   isMyPage = signal(false);
 
-  me = this.store.selectSignal(selectMe);
+  me$: Observable<Profile | null> = this.store.select(selectMe);
 
   subscribers$ = this.profileService.getSubscribersShortList(5);
 
   profile$: Observable<Profile | null> = this.route.params.pipe(
-    switchMap(({ id }) => {
-      this.isMyPage.set(id === 'me' || id === this.me()?.id);
+    switchMap(({ id }) =>
+      this.me$.pipe(
+        switchMap((meProfile) => {
+          this.isMyPage.set(id === 'me' || id === meProfile?.id);
 
-      if (id === 'me') {
-        return of(this.me());
-      }
+          if (id === 'me') {
+            return of(meProfile);
+          }
 
-      // Возвращаем Observable из сервиса
-      return this.profileService.getAccount(id);
-    })
+          return this.profileService.getAccount(id);
+        })
+      )
+    )
   );
+
   async sendMessag(userId: number) {
     this.router.navigate([`/chats`, 'new'], { queryParams: { userId } });
   }
